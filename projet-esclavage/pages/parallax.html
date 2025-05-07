@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://use.typekit.net/ivb6ffg.css" />
+    <title>Parallax</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #f0f0f0;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 30px 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+      }
+
+      .logo img {
+        width: 100px;
+      }
+
+      nav ul {
+        list-style-type: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #333;
+      }
+
+      .parallax {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      #text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 5em;
+        color: #fff;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      .parallax img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        pointer-events: none;
+      }
+      .sec {
+        position: relative;
+        padding: 100px;
+        background-color: #003329;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .sec h2 {
+        font-size: 3em;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .sec p {
+        font-size: 1em;
+        color: #fff;
+        text-align: center;
+        line-height: 1.6;
+      }
+      .slider-container {
+        position: fixed;
+        top: 50%;
+        right: 50px;
+        transform: translateY(-50%);
+        height: 300px;
+        z-index: 10;
+      }
+
+      #timeline-slider {
+        writing-mode: vertical-lr;
+        -webkit-appearance: slider-vertical;
+        width: 10px;
+        height: 100%;
+        background: transparent;
+      }
+
+      .image-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .slide {
+        position: absolute;
+        max-width: 40%; /* ajuste selon besoin */
+        height: auto;
+        opacity: 0; /* Caché par défaut */
+        transform: scale(0); /* Réduit à 0 par défaut */
+        transition: opacity 0.6s ease, transform 0.6s ease, top 0.6s ease, left 0.6s ease; /* Ajout transition top/left */
+        z-index: 0;
+        pointer-events: none;
+        /* Supprimer left/bottom ici, sera géré par active/inactive */
+      }
+
+      .slide.active {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(var(--angle)); /* Transform pour l'image active */
+        left: var(--left); /* Positionnement dynamique */
+        bottom: var(--bottom); /* Positionnement dynamique */
+        top: auto; /* Assurer que top n'interfère pas */
+        z-index: 2; /* Au-dessus des inactives */
+        pointer-events: auto;
+      }
+
+      .slide.inactive {
+        opacity: 1; /* Légèrement plus transparent */
+        transform: scale(1); /* Légèrement plus petit */
+        max-width: 100%; /* Réduire la largeur maximale pour les inactives */
+        /* Positionnement dans le coin supérieur gauche par défaut, sera ajusté par JS */
+        top: 20px;
+        left: 20px;
+        bottom: auto; /* Assurer que bottom n'interfère pas */
+        z-index: 1; /* Derrière l'active, mais visible */
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <a href="../index.html">
+          <img src="../images/logo.png" alt="FME Logo" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">EN</a></li>
+          <li><a href="#">FR</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="parallax">
+      <h2 id="text">ESCLAVE ET CHEF SPIRITUEL</h2>
+      <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746611969/FOND.png" id="font" />
+      <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746611696/MONTAGNE-GAUCHE.png" id="grand-mont" />
+      <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746611695/MONTAGNE-DROIT.png" id="petit-mont" />
+      <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746535503/NUAGE-DROIT.svg" id="n-d" />
+      <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746535503/NUAGE-AUMILIEU.svg" id="n-c" />
+      <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746535503/NUAGE-GAUCHE.svg" id="n-g" />
+      <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746535650/EAU.svg" id="eau" />
+      <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746611969/PELOUSE-D.png" id="p-d" />
+      <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746611969/PELOUSE-G.png" id="p-g" /> 
+    </section>
+    <section class="sec">
+      <h2>
+        Nous sommes en 1791 dans la plantation Turpin, sur la plaine du Nord de
+        Saint-Domingue, où y travaillent, de force, plusieurs dizaines
+        d’esclaves.
+      </h2>
+      <div class="slider-container">
+        <input type="range" id="timeline-slider" min="0" max="4" value="0" />
+      </div>
+
+      <div class="image-container">
+        <img src="../images/pic1.jpg" class="slide active" />
+        <img src="../images/pic2.jpg" class="slide" />
+        <img src="../images/pic3.jpg" class="slide" />
+        <img src="../images/pic4.jpg" class="slide" />
+        <img src="../images/pic5.jpg" class="slide" />
+      </div>
+    </section>
+    <script>
+      window.addEventListener("scroll", function () {
+        const scrollY = window.scrollY;
+
+        // Fond (le plus lent)
+        document.getElementById("font").style.transform = `translateY(${
+          scrollY * 0.2
+        }px)`;
+
+        // Montagnes
+        document.getElementById("grand-mont").style.transform = `translateY(${
+          scrollY * 0.4
+        }px)`;
+        document.getElementById("petit-mont").style.transform = `translateY(${
+          scrollY * 0.5
+        }px)`;
+
+        // Nuages
+        document.getElementById("n-g").style.transform = `translateX(${
+          -scrollY * 0.2
+        }px)`;
+        document.getElementById("n-c").style.transform = `translateX(${
+          scrollY * 0.15
+        }px)`;
+        document.getElementById("n-d").style.transform = `translateX(${
+          scrollY * 0.25
+        }px)`;
+
+        // Eau
+        document.getElementById("eau").style.transform = `translateY(${
+          scrollY * 0.6
+        }px)`;
+
+        // Pelouse
+        document.getElementById("p-g").style.transform = `translateY(${
+          scrollY * 0.7
+        }px)`;
+        document.getElementById("p-d").style.transform = `translateY(${
+          scrollY * 0.75
+        }px)`;
+
+        // Texte
+        document.getElementById(
+          "text"
+        ).style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.3}px))`;
+      });
+      const slider = document.getElementById("timeline-slider");
+      const slides = document.querySelectorAll(".slide");
+
+      // Définir différentes positions et rotations pour chaque image
+      const positions = [
+        { left: "10%", bottom: "10%", angle: "-5deg" },
+        { left: "60%", bottom: "15%", angle: "8deg" },
+        { left: "30%", bottom: "5%", angle: "-10deg" },
+        { left: "50%", bottom: "20%", angle: "5deg" },
+        { left: "20%", bottom: "25%", angle: "-8deg" },
+      ];
+      // Initialiser la première diapositive comme active
+      function initializeSlider() {
+        const initialIndex = parseInt(slider.value);
+        slides.forEach((slide, i) => {
+          slide.classList.remove("active", "inactive");
+          if (i === initialIndex) {
+            slide.style.setProperty("--left", positions[i].left);
+            slide.style.setProperty("--bottom", positions[i].bottom);
+            slide.style.setProperty("--angle", positions[i].angle);
+            slide.classList.add("active");
+          }
+          // Les autres restent cachées par défaut
+        });
+      }
+
+      slider.addEventListener("input", () => {
+        const currentIndex = parseInt(slider.value);
+
+        slides.forEach((slide, i) => {
+          // Réinitialiser les classes et styles spécifiques à la position active
+          slide.classList.remove("active", "inactive");
+          slide.style.removeProperty("--left");
+          slide.style.removeProperty("--bottom");
+          slide.style.removeProperty("--angle");
+          slide.style.top = ""; // Réinitialiser le style 'top' inline
+          slide.style.left = ""; // Réinitialiser le style 'left' inline
+
+          if (i === currentIndex) {
+            // Appliquer le style actif
+            slide.style.setProperty("--left", positions[i].left);
+            slide.style.setProperty("--bottom", positions[i].bottom);
+            slide.style.setProperty("--angle", positions[i].angle);
+            slide.classList.add("active");
+          } else if (i < currentIndex) {
+            // Appliquer le style inactif pour les images précédentes
+            slide.classList.add("inactive");
+
+            if (i === 0) {
+              // Première image inactive : coin supérieur gauche
+              slide.style.top = '20px';
+              slide.style.left = '20px';
+              // Assurez-vous que 'right' n'est pas défini si vous l'utilisiez ailleurs
+              slide.style.right = 'auto';
+            } else if (i === 1) {
+              // Deuxième image inactive : coin supérieur droit
+              slide.style.top = '20px';
+              // Positionner près du bord droit. Ajustez '120px' selon la taille souhaitée ou utilisez un pourcentage.
+              slide.style.left = 'calc(100% - 120px)';
+              slide.style.right = 'auto'; // Alternative: slide.style.right = '20px'; slide.style.left = 'auto';
+            } else {
+              // Autres images inactives : position aléatoire dans la partie supérieure
+              const randomTop = 15 + Math.random() * 50; // Position top aléatoire entre 15px et 65px
+              const randomLeft = 10 + Math.random() * 80; // Position left aléatoire entre 10% et 90%
+              slide.style.top = `${randomTop}px`;
+              slide.style.left = `${randomLeft}%`;
+              slide.style.right = 'auto';
+            }
+          }
+          // Les images avec i > currentIndex n'ont aucune classe ajoutée,
+          // elles utiliseront donc le style .slide par défaut (caché).
+        });
+      });
+
+      // Appeler l'initialisation au chargement
+      initializeSlider();
+    </script>
+  </body>
+</html>

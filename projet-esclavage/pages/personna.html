@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/ivb6ffg.css" />
+    <title>L'abolition de l'esclavage</title>
+    <style>
+      @font-face {
+        font-family: "icomoon";
+        src: url("../font/icomoon/icomoon.ttf") format("opentype"); /* Mettez à jour le chemin vers votre fichier .otf */
+        font-weight: normal;
+        font-style: normal;
+      }
+      /* Styles généraux */
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #fff4d1;
+        background-image: url("https://res.cloudinary.com/da9k32mdb/image/upload/v1746534412/FONT.jpg");
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        width: 100%;
+        text-align: center;
+        overflow-y: hidden;
+        opacity: 0.9;
+      }
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(212, 212, 212, 0.5); /* Couleur de fond blanche avec opacité */
+        z-index: -1; /* Placer derrière le contenu */
+      }
+    
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: transparent;
+        position: fixed;
+        top: 30px;
+        width: 90%;
+        z-index: 10;
+      }
+
+      header .logo img {
+        height: 100px; /* Taille du logo */
+      }
+
+      header nav ul {
+        list-style: none;
+        display: flex;
+      }
+
+      header nav ul li {
+        margin-left: 20px;
+      }
+
+      header nav ul li a {
+        text-decoration: none;
+        color: #281212;
+        font-weight: bold;
+      }
+      .title {
+        width: 100%; /* Prendre toute la largeur disponible */
+        background-color: #281212;
+        padding: 0; /* Supprimer le padding */
+        margin: 0; /* Supprimer les marges */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .title h2 {
+        text-align: center;
+        font-size: 3.5rem;
+        margin: 10px 0;
+        color: #fff;
+        font-family: "brother-1816", sans-serif;
+        font-style: normal;
+        line-height: 1.5;
+      }
+      .title p {
+        text-align: center;
+        font-size: 1.2rem;
+        margin: 20px 0;
+        color: #fff;
+        font-family: "icomoon", sans-serif;
+        font-style: normal;
+        font-weight: 200;
+        line-height: 1.5;
+        width: 100%;
+        max-width: 1200px;
+        letter-spacing: O.03em;
+      }
+      .container {
+        width: 100%; /* S'assurer que le conteneur occupe toute la largeur */
+        margin-top: 80px;
+        padding: 0; /* Supprimer toute marge interne */
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        position: relative; /* Pour le positionnement absolu des éléments enfants */
+        padding-bottom: 0px; /* Pour éviter que le contenu ne soit masqué par le header */
+      }
+
+      /* Main content container */
+      .gallery {
+        margin: 20px 80px;
+        width: 100%;
+        max-width: 1400px;
+      }
+
+      /* Title */
+      .gallery h1 {
+        font-size: 2.5em;
+        color: white;
+        margin-bottom: 10px;
+      }
+
+      .gallery h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+      }
+
+      .flex-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+      }
+      /* Description */
+      .description {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+        line-height: 1.6;
+      }
+
+      /* Personnages - version scroll horizontal */
+      .characters {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 10px 0;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 7px;
+        position: relative; /* Important pour que les boutons soient positionnés par rapport à .characters */
+        width: 100%;
+      }
+
+      .character-card {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        text-align: center;
+        width: 300px;
+        transition: transform 0.3s, opacity 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* Cache l'excédent de l'image si nécessaire */
+        color: #281212;
+        font-family: "icomoon", sans-serif;
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      .character-card img {
+        width: 260px;
+        height: 320px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+        object-fit: cover; /* L'image est recadrée pour s'adapter au cercle */
+        object-position: center; /* Centrer l'image à l'intérieur de la carte */
+        border: #281212 10px solid; /* Bordure blanche */
+      }
+
+      .character-card:hover {
+        transform: scale(1.05);
+        opacity: 1; /* Rétablir l'opacité lors du survol */
+        z-index: 9999; /* Assurer que la carte est au premier plan */
+      }
+
+      .character-card.not-hovered {
+        opacity: 0.8; /* Réduire l'opacité des cartes non survolées */
+        filter: grayscale(100%); /* Appliquer un filtre de désaturation */
+      }
+      .text-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 20px;
+        max-width: 280px; /* Limiter la largeur du texte */
+
+      }
+      .character-card h2 {
+        font-size: 1.5em;
+        color: #281212;
+        font-weight: 700;
+        justify-content: center;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+      .character-card p {
+        font-size: 14px;
+        color: #281212;
+        font-weight: 300;
+        justify-content: center;
+        text-align: center;
+        margin: 10px 0;
+        padding: 0;
+      }
+
+      .characters {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+
+      .timeline-container {
+        position: relative;
+        width: 100%;
+        padding: 20px 0;
+        max-width: 1500px;
+        margin-bottom: 40px;
+        overflow: hidden;
+      }
+
+      .timeline {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+        max-width: 1600px;
+        font-family: "icomoon", sans-serif;
+        font-style: normal;
+        font-size: 0.9rem;
+        margin-top: 80px;
+      }
+
+      .timeline-item {
+        display: inline-block;
+        text-align: center;
+        padding: 1rem 2rem;
+        color: #281212;
+        text-decoration: none;
+        position: relative;
+        z-index: 2;
+      }
+
+      .timeline-item.active {
+        color: #281212;
+        font-family: "icomoon", sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+
+      .timeline-load {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background-color: #fff3;
+        width: 0%;
+        transition: width 0.5s ease-in-out;
+      }
+
+      .progress-bar {
+        position: absolute;
+        bottom: -5px; /* Position juste en dessous de la barre de timeline */
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: #281212;
+        overflow: hidden;
+        border-radius: 24px;
+      }
+
+      .progress-bar-inner {
+        background-color: #FF5D15;
+        height: 100%;
+        width: 0%;
+        transition: width 2s ease-in-out;
+      }
+
+      .progress-bar-inner-after {
+        background-color: #FF5D15;
+        height: 100%;
+        width: 0%;
+      }
+
+      .timeline-item.active .timeline-load {
+        width: 50%;
+      }
+
+      .timeline a {
+        display: inline-block;
+        margin: 0 10px;
+        transition: color 0.3s ease-in-out;
+      }
+
+      .timeline a:hover {
+        
+      }
+      /* Style des boutons avec les icônes */
+      /* Positionnement des boutons à l'intérieur de .characters */
+      .prev,
+      .next {
+        background-color: transparent;
+        color: #281212;
+        border: none;
+        font-size: 2rem; /* Taille de l'icône */
+        cursor: pointer;
+        z-index: 10;
+        padding: 15px;
+      }
+
+      .prev:hover,
+      .next:hover {
+      }
+
+      .prev:disabled,
+      .next:disabled {
+        color: #b8b7b7;
+        cursor: not-allowed;
+      }
+
+      .prev i,
+      .next i {
+        font-size: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="timeline-container">
+        <div class="timeline">
+          <a href="#1971" class="timeline-item" data-year="1971">
+            <div>1990s – aujourd’hui</div>
+            <div class="timeline-load" id="load-1971"></div>
+            <div class="progress-bar" id="progress-1971"></div>
+          </a>
+          <a href="#1975" class="timeline-item" data-year="1975">
+            <div>5e – 15e siècle</div>
+            <div class="timeline-load" id="load-1975"></div>
+            <div class="progress-bar" id="progress-1975"></div>
+          </a>
+          <a href="#1976" class="timeline-item" data-year="1976">
+            <div>16e – 17e siècle</div>
+            <div class="timeline-load" id="load-1976"></div>
+            <div class="progress-bar" id="progress-1976"></div>
+          </a>
+          <a href="#2006" class="timeline-item" data-year="2006">
+            <div>1789 – 1802</div>
+            <div class="timeline-load" id="load-2006"></div>
+            <div class="progress-bar" id="progress-2006"></div>
+          </a>
+          <a href="#2013" class="timeline-item active" data-year="2013">
+            <div>1802 – 1848</div>
+            <div class="timeline-load" id="load-2013"></div>
+            <div class="progress-bar" id="progress-2013"></div>
+          </a>
+          <a href="#2018" class="timeline-item" data-year="2018">
+            <div>1848 – fin 19e siècle</div>
+            <div class="timeline-load" id="load-2018"></div>
+            <div class="progress-bar" id="progress-2018"></div>
+          </a>
+          <a href="#2020" class="timeline-item" data-year="2020">
+            <div>mi 20e siècle – 1980s</div>
+            <div class="timeline-load" id="load-2020"></div>
+            <div class="progress-bar" id="progress-2020"></div>
+          </a>
+        </div>
+      </section>
+    <header>
+      <div class="logo">
+        <a href="../index.html">
+          <img src="../images/logo.png" alt="FME Logo" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">EN</a></li>
+          <li><a href="#">FR</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="title">
+      <h2>L’abolition de l’esclavage et son rétablissement</h2>
+      <p>
+        Plongez au cœur de l’une des révolutions les plus marquantes de
+        l’histoire : la lutte pour l’abolition de l’esclavage à Saint-Domingue
+        (1789-1802). À travers le destin de quatre figures emblématiques.
+      </p>
+    </section>
+    <div class="container">
+      <section class="gallery">
+        <!-- Characters -->
+        <div class="flex-container">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <div class="characters">
+            <div class="character-card">
+              <img
+                src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534666/P1.jpg"
+                alt="Sanite Belair"
+              />
+              <div class="text-card">
+                <h2>Sanite Belair</h2>
+                <p>Lieutenante de l'armée révolutionnaire haïtienne</p>
+              </div>
+            </div>
+            <div class="character-card">
+              <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534666/P2.jpg" alt="Toussaint Louverture" />
+              <div class="text-card">
+                <h2>Sanite Belair</h2>
+                <p>Lieutenante de l'armée révolutionnaire haïtienne</p>
+              </div>
+            </div>
+            <div class="character-card">
+              <img
+                src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534667/P3.png"
+                alt="Jean-Jacques Dessalines"
+              />
+              <div class="text-card">
+                <h2>Sanite Belair</h2>
+                <p>Lieutenante de l'armée révolutionnaire haïtienne</p>
+              </div>
+            </div>
+            <div class="character-card">
+              <a href="../pages/sanite.html"><img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534913/P4.jpg" alt="Dutty Boukman" /></a>
+              <div class="text-card">
+                <h2>Sanite Belair</h2>
+                <p>Lieutenante de l'armée révolutionnaire haïtienne</p>
+              </div>
+            </div>
+            <div class="character-card">
+              <img src="../images/Dutty-Boukman.png" alt="Dutty Boukman" />
+              <p>Dutty Boukman</p>
+            </div>
+            <div class="character-card">
+              <img src="../images/Dutty-Boukman.png" alt="Dutty Boukman" />
+              <p>Dutty Boukman</p>
+            </div>
+            <div class="character-card">
+              <img src="../images/Dutty-Boukman.png" alt="Dutty Boukman" />
+              <p>Dutty Boukman</p>
+            </div>
+            <div class="character-card">
+              <img src="../images/Dutty-Boukman.png" alt="Dutty Boukman" />
+              <p>Dutty Boukman</p>
+            </div>
+            <div class="character-card">
+              <img src="../images/Dutty-Boukman.png" alt="Dutty Boukman" />
+              <p>Dutty Boukman</p>
+            </div>
+          </div>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const prevButton = document.querySelector(".prev");
+      const nextButton = document.querySelector(".next");
+      const charactersContainer = document.querySelector(".characters");
+
+      // Fonction pour activer/désactiver les boutons en fonction de la position du scroll
+      function updateButtons() {
+        const maxScroll =
+          charactersContainer.scrollWidth - charactersContainer.clientWidth;
+        prevButton.disabled = charactersContainer.scrollLeft <= 0;
+        nextButton.disabled = charactersContainer.scrollLeft >= maxScroll;
+      }
+
+      // Event listeners pour les boutons
+      prevButton.addEventListener("click", () => {
+        charactersContainer.scrollBy({
+          left: -300, // Défile de 300px vers la gauche
+          behavior: "smooth", // Défilement fluide
+        });
+        updateButtons();
+      });
+
+      nextButton.addEventListener("click", () => {
+        charactersContainer.scrollBy({
+          left: 300, // Défile de 300px vers la droite
+          behavior: "smooth", // Défilement fluide
+        });
+        updateButtons();
+      });
+
+      // Mise à jour de l'état des boutons au chargement et lors du défilement
+      updateButtons();
+
+      // Event listeners pour le défilement manuel de la galerie
+      charactersContainer.addEventListener("scroll", updateButtons);
+
+      // Fonction pour gérer le survol des cartes de personnages
+      const characterCards = document.querySelectorAll(".character-card");
+
+      characterCards.forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          // Quand on survole une carte, on applique 'not-hovered' aux autres cartes
+          characterCards.forEach((otherCard) => {
+            if (otherCard !== card) {
+              otherCard.classList.add("not-hovered");
+            }
+          });
+        });
+
+        card.addEventListener("mouseleave", () => {
+          // Quand on quitte le survol d'une carte, on retire 'not-hovered' de toutes les cartes
+          characterCards.forEach((otherCard) => {
+            otherCard.classList.remove("not-hovered");
+          });
+        });
+      });
+
+      let currentIndex = 0;
+      const items = document.querySelectorAll(".timeline-item");
+
+      function setActive(index) {
+        items.forEach((item, i) => {
+          item.classList.remove("active");
+          document.getElementById("load-" + item.dataset.year).style.width =
+            "0%";
+          const progressBar = item.querySelector(".progress-bar-inner");
+          if (progressBar) progressBar.style.width = "0%";
+        });
+
+        items[index].classList.add("active");
+        document.getElementById(
+          "load-" + items[index].dataset.year
+        ).style.width = "50%";
+
+        const activeProgressBar = items[index].querySelector(
+          ".progress-bar-inner"
+        );
+        if (activeProgressBar) {
+          activeProgressBar.style.width = "100%"; // Remplir la barre de progression
+        }
+      }
+
+      items.forEach((item, index) => {
+        item.addEventListener("click", (e) => {
+          e.preventDefault();
+          currentIndex = index;
+          setActive(index);
+        });
+      });
+
+      // Créer la barre de progression pour chaque année
+      items.forEach((item) => {
+        const progressBar = document.createElement("div");
+        progressBar.classList.add("progress-bar-inner");
+        item.querySelector(".progress-bar").appendChild(progressBar);
+      });
+
+      // Initialiser avec le premier élément actif
+      setActive(currentIndex);
+    </script>
+  </body>
+</html>

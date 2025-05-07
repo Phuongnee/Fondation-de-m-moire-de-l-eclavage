@@ -1,0 +1,168 @@
+/* Réinitialisation et base */
+/* Définir la police personnalisée */
+@font-face {
+  font-family: "Brother1816";
+  src: url("./font/07-brother1816-regular.otf") format("opentype"); /* Mettez à jour le chemin vers votre fichier .otf */
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "icomoon",sans-serif;
+  src: url("./font/icomoon/icomoon.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Appliquer la police à l'ensemble du site */
+body {
+  font-family: "Brother1816", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Mise en page du corps */
+body {
+  font-family: "Arial", sans-serif;
+}
+
+/* Entête - position fixe en haut */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 40px;
+  padding-left: 80px;
+  padding-right: 80px;
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+header .logo img {
+  height: 70px; /* Taille du logo */
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+}
+
+header nav ul li {
+  margin-left: 20px;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+/* Section Hero - fond d'image et superposition de texte */
+.hero {
+  height: 100vh; /* La section prend toute la hauteur de la fenêtre */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("./images/back-ground.jpg"); /* Image de fond */
+  background-size: cover; /* L'image couvre toute la zone */
+  background-position: center; /* Centrer l'image */
+  position: relative;
+}
+
+/* Fond carré noir avec opacité 50% */
+.hero .overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Fond noir avec 50% d'opacité */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero .hero-text {
+  color: #fff; /* Texte blanc */
+}
+
+.hero h1 {
+  font-family: "brother-1816", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 56px;
+  line-height: 1.5 !important; /* Espacement des lignes */
+  letter-spacing: normal;
+}
+
+.hero p {
+  font-size: 24px; /* Taille du sous-titre */
+  margin-top: 20px; /* Espacement entre le titre et le sous-titre */
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px; /* Placer tout en bas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.scroll-indicator a {
+  text-decoration: none;
+}
+.scroll-indicator p {
+  color: #fff; /* Texte en blanc */
+  font-size: 18px; /* Taille du texte */
+  font-family: "icomoon", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.scroll-indicator i {
+  font-size: 40px;
+  margin-top: 20px;
+  color: #fff; /* Texte en blanc */
+}
+
+.scroll-indicator img {
+  width: 50px; /* Taille de l'icône */
+  margin-bottom: 5px; /* Espacement entre l'icône et la flèche */
+}
+.scroll-indicator i {
+  animation: pulse 1.5s infinite ease-in-out; /* Animation de pulsation */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1); /* L'icône devient légèrement plus grande */
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Responsivité (optionnelle, pour mobile et tablette) */
+@media (max-width: 768px) {
+  .time-circle {
+    width: 80%;
+    height: 80%;
+  }
+
+  .period {
+    font-size: 12px; /* Réduction de la taille des périodes sur mobile */
+  }
+}

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://use.typekit.net/ivb6ffg.css" />
+    <title>La Montre</title>
+    <style>
+      @font-face {
+        font-family: "icomoon";
+        src: url("../font/icomoon/icomoon.ttf") format("opentype"); /* Mettez à jour le chemin vers votre fichier .otf */
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-attachment: fixed;
+        color: White;
+        transition: background-color 0.5s ease;
+        overflow-x: hidden; /* Empêche le défilement horizontal */
+        cursor: none;
+        background: url("../images/back-ground.jpg") no-repeat center center
+          fixed;
+        background-size: cover; /* L'image couvre toute la zone */
+        background-position: center; /* Centrer l'image */
+      }
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(7, 8, 10, 0.5);
+        /*background-image: url(https://assets.iceable.com/img/noise-transparent.png);*/
+        opacity: 1; /* Ajustez l'opacité selon vos besoins */
+        pointer-events: none; /* Empêche les interactions avec le pseudo-élément */
+        z-index: -2;
+        cursor: none;
+      }
+
+      /* Entête - position fixe en haut */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: transparent;
+        position: fixed;
+        top: 40px;
+        width: 90%;
+        z-index: 10;
+      }
+
+      header .logo img {
+        height: 70px; /* Taille du logo */
+      }
+
+      header nav ul {
+        list-style: none;
+        display: flex;
+      }
+
+      header nav ul li {
+        margin-left: 20px;
+      }
+
+      header nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+      }
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1400px;
+        padding: 40px;
+        gap: 150px;
+      }
+
+      .circle-container {
+        position: relative;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: url("https://res.cloudinary.com/da9k32mdb/image/upload/v1746533526/CARTEGROUPE.png") no-repeat center;
+        background-size: cover;
+        border: 10px solid transparent; /* Bordure réduite */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: 0; /* Positionnement standard */
+        transition: background-image 1s ease-in-out;
+      }
+
+      /* Thêm viền texture bằng pseudo-element */
+      .circle-container::before {
+        content: "";
+        position: absolute;
+        top: -60px; /* Căn đúng với border */
+        left: -60px;
+        width: 720px;
+        height: 720px;
+        background: url("https://res.cloudinary.com/da9k32mdb/image/upload/v1746533792/BORDUE.jpg") no-repeat center;
+        background-size: cover;
+        border-radius: 50%;
+        z-index: -1;
+      }
+      .text-container {
+        max-width: 600px; /* Limite la largeur du texte */
+        color: white;
+      }
+
+      .text-container h1 {
+        font-size: 4em;
+        margin-bottom: 20px;
+        font-family: "brother-1816", sans-serif;
+        font-weight: 600;
+        font-style: normal;
+      }
+
+      .text-container p {
+        font-size: 1.3em;
+        line-height: 1.6;
+        font-family: "icomoon", sans-serif;
+        font-weight: 300;
+      }
+      .selection {
+        font-size: 1.2em;
+        font-weight: 700;
+        margin-top: 20px;
+        font-family: "icomoon", sans-serif;
+        font-style: italic;
+      }
+
+      /* Các nút nằm trong viền */
+      .segment {
+        position: absolute;
+        width: auto; /* Tăng kích thước nút */
+        height: auto;
+        background-color: transparent;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transform-origin: center;
+        transition: background 0.3s, transform 0.2s;
+        border: none;
+        font-size: 24px;
+        text-align: center;
+      }
+
+      /* Hiệu ứng hover */
+      .segment:hover {
+        background-color: rgba(12, 15, 12, 0.9);
+        opacity: 0.7;
+        transform: scale(1.1);
+      }
+      /* Style de la hover card */
+      .hover-card {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 20px 15px;
+        border-radius: 8px;
+        font-size: 16px;
+        white-space: nowrap;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s, transform 0.2s;
+        transform: translate(-50%, -10px);
+        pointer-events: none; /* Empêche les interactions */
+        z-index: 1000;
+      }
+
+      /* Khi nút được chọn */
+      .active {
+        background-color: yellow !important;
+        color: black;
+      }
+      /* Description de la période */
+      .description-container {
+        padding: 40px;
+        border-radius: 15px;
+        text-align: center;
+        max-width: 800px;
+        width: 100%;
+        color: white;
+      }
+
+      .title {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+        font-family: "brother-1816", sans-serif;
+      }
+
+      .period {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+      }
+
+      .description {
+        font-size: 1.2em;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      /* Personnages principaux */
+      .characters {
+        display: flex;
+        justify-content: space-around;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .character {
+        text-align: center;
+      }
+
+      .character img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+      }
+
+      /* Style du bouton */
+      .discover-btn {
+        padding: 12px 24px;
+        font-size: 1.2em;
+        background-color: transparent;
+        color: white;
+        border: 2px solid white;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .discover-btn:hover {
+        background-color: #4c3626;;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="../index.html">
+          <img src="../images/logo.png" alt="FME Logo" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">EN</a></li>
+          <li><a href="#">FR</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="circle-container" id="circle"></div>
+      <div class="hover-card" id="hoverCard">Texte ici</div>
+      <!-- Section description par défaut -->
+      <div class="text-container" id="text-container">
+        <h1>Bienvenue</h1>
+        <p>
+          Nous vous plongeons au cœur des histoires décoloniales à travers
+          différentes périodes et figures emblématiques. Ici, l'histoire n'est
+          pas seulement racontée : vous la vivez à travers les parcours de
+          celles et ceux qui l'ont façonnée...
+        </p>
+        <p class="selection">← Sélectionnez la période</p>
+      </div>
+    </div>
+
+    <!-- Nouvelle section Description de la période -->
+    <div class="description-container" id="content">
+      <!-- Ce contenu sera mis à jour dynamiquement par JavaScript -->
+    </div>
+
+    <script>
+      const container = document.getElementById("circle");
+      const labels = ["I", "II", "IV", "V", "VI", "VII", "IX", "X"];
+      const radius = 327; // Ajuste le rayon pour que les boutons soient dans un cercle plus grand
+      const centerX = 300, // Déplace le centre vers la gauche
+        centerY = 300;
+
+      // Contenu dynamique pour chaque période
+      const content = {
+        I: {
+          title: "1990s – aujourd’hui",
+          date: "1990 – aujourd’hui",
+          description:
+            "L'histoire contemporaine des peuples décolonisés, marquée par les luttes sociales et politiques.",
+          characters: [
+            { name: "Sanite Belair", img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Sanite-Belair.png" },
+            {
+              name: "Toussaint Louverture",
+              img: "../images/Toussaint-Louverture.png",
+            },
+            {
+              name: "Jean-Jacques Dessalines",
+              img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Jean-Jacques.png",
+            },
+            { name: "Dutty Boukman", img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Dutty-Boukman.png" },
+          ],
+          image: "../images/haiti.png",
+        },
+        II: {
+          title: "5e – 15e siècle",
+          date: "5e – 15e siècle",
+          description:
+            "L'histoire de l'expansion européenne et des premières rencontres avec les sociétés colonisées.",
+          characters: [
+            { name: "Sanite Belair", img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Sanite-Belair.png" },
+            {
+              name: "Toussaint Louverture",
+              img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Toussaint-Louverture.png",
+            },
+            {
+              name: "Jean-Jacques Dessalines",
+              img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Jean-Jacques.png",
+            },
+            { name: "Dutty Boukman", img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Dutty-Boukman.png" },
+          ],
+          image: "../images/haiti.png",
+        },
+        // Ajoutez d'autres périodes ici...
+      };
+
+      labels.forEach((label, index) => {
+        const angle = (index / labels.length) * 2 * Math.PI;
+        const x = centerX + Math.cos(angle) * radius;
+        const y = centerY + Math.sin(angle) * radius;
+
+        const button = document.createElement("div");
+        button.classList.add("segment");
+        button.style.left = `${x}px`;
+        button.style.top = `${y}px`;
+        button.style.transform = `translate(-50%, -50%)`;
+        button.innerText = label;
+
+        button.addEventListener("click", () => {
+          // Récupérer le contenu de la période sélectionnée
+          const periodContent = content[label];
+
+          // Mise à jour de l'image de fond de .circle-container
+          container.style.backgroundImage = `url(${periodContent.image})`;
+
+          // Mise à jour du contenu de .text-container
+          const textContainer = document.getElementById("text-container");
+          textContainer.innerHTML = `
+            <h1>${periodContent.title}</h1>
+            <h2>${periodContent.date}</h2>
+            <p>${periodContent.description}</p>
+          `;
+
+          // Mise à jour des personnages
+          const charactersContainer = document.createElement("div");
+          charactersContainer.classList.add("characters");
+          periodContent.characters.forEach((character) => {
+            const characterDiv = document.createElement("div");
+            characterDiv.classList.add("character");
+            characterDiv.innerHTML = `
+             <img src="${character.img}" alt="${character.name}" />
+             <p>${character.name}</p>
+           `;
+            charactersContainer.appendChild(characterDiv);
+          });
+
+          // Ajout des personnages à la description
+          textContainer.appendChild(charactersContainer);
+          // Ajout du bouton "Découvrir la période"
+          const discoverButton = document.createElement("button");
+          discoverButton.classList.add("discover-btn");
+          discoverButton.innerHTML = "Découvrir la période →";
+
+          // Création du lien pour "Découvrir la période"
+          const discoverLink = document.createElement("a");
+          discoverLink.href = "personna.html"; // Lien vers la page dans le même dossier
+
+          // Ajout du bouton à l'intérieur du lien
+          discoverLink.appendChild(discoverButton);
+
+          // Ajouter le lien (avec le bouton) à textContainer
+          textContainer.appendChild(discoverLink);
+        });
+
+        container.appendChild(button);
+      });
+    </script>
+  </body>
+</html>
