@@ -56,7 +56,7 @@
       }
 
       header .logo img {
-        height: 70px; /* Taille du logo */
+        height: 100px; /* Taille du logo */
       }
 
       header nav ul {
@@ -87,7 +87,8 @@
         width: 600px;
         height: 600px;
         border-radius: 50%;
-        background: url("https://res.cloudinary.com/da9k32mdb/image/upload/v1746533526/CARTEGROUPE.png") no-repeat center;
+        background: url("https://res.cloudinary.com/da9k32mdb/image/upload/v1746533526/CARTEGROUPE.png")
+          no-repeat center;
         background-size: cover;
         border: 10px solid transparent; /* Bordure réduite */
         display: flex;
@@ -104,7 +105,8 @@
         left: -60px;
         width: 720px;
         height: 720px;
-        background: url("https://res.cloudinary.com/da9k32mdb/image/upload/v1746533792/BORDUE.jpg") no-repeat center;
+        background: url("https://res.cloudinary.com/da9k32mdb/image/upload/v1746533792/BORDUE.jpg")
+          no-repeat center;
         background-size: cover;
         border-radius: 50%;
         z-index: -1;
@@ -246,7 +248,7 @@
       }
 
       .discover-btn:hover {
-        background-color: #4c3626;;
+        background-color: #4c3626;
       }
 
       /* Added for new image transition effects */
@@ -262,13 +264,21 @@
       }
 
       @keyframes fadeOutEffect {
-        from { opacity: 1; }
-        to { opacity: 0; }
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
       }
 
       @keyframes fadeInEffect {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
 
       .perform-initial-zoom {
@@ -305,10 +315,9 @@
       <div class="text-container" id="text-container">
         <h1>Bienvenue</h1>
         <p>
-          Nous vous plongeons au cœur des histoires décoloniales à travers
-          différentes périodes et figures emblématiques. Ici, l'histoire n'est
-          pas seulement racontée : vous la vivez à travers les parcours de
-          celles et ceux qui l'ont façonnée...
+          (Re)découvrez les figures emblématiques de la lutte contre l’esclavage
+          et le racisme à travers les siècles. Plongez au cœur de l’Histoire et
+          vivez les parcours de celles et ceux qui l’ont façonnée !
         </p>
         <p class="selection">← Sélectionnez la période</p>
       </div>
@@ -334,7 +343,10 @@
           description:
             "L'histoire contemporaine des peuples décolonisés, marquée par les luttes sociales et politiques.",
           characters: [
-            { name: "Sanite Belair", img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Sanite-Belair.png" },
+            {
+              name: "Sanite Belair",
+              img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Sanite-Belair.png",
+            },
             {
               name: "Toussaint Louverture",
               img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Toussaint-Louverture.png",
@@ -343,17 +355,24 @@
               name: "Jean-Jacques Dessalines",
               img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Jean-Jacques.png",
             },
-            { name: "Dutty Boukman", img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Dutty-Boukman.png" },
+            {
+              name: "Dutty Boukman",
+              img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Dutty-Boukman.png",
+            },
           ],
-          image: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746534278/Haiti.png",
+          image:
+            "https://res.cloudinary.com/da9k32mdb/image/upload/v1746534278/Haiti.png",
         },
         II: {
           title: "5e – 15e siècle",
           date: "5e – 15e siècle",
           description:
-            "L'histoire de l'expansion européenne et des premières rencontres avec les sociétés colonisées.",
+            "Premier pays à abolir l’esclavage, la France est aussi le seul à l’avoir rétabli… Explorez l’une des révolutions les plus marquantes de l’histoire : la lutte pour l’abolition de l’esclavage à Saint-Domingue et contre la restauration de l’ordre colonial par Bonaparte, à travers le destin de quatre figures emblématiques.",
           characters: [
-            { name: "Sanite Belair", img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Sanite-Belair.png" },
+            {
+              name: "Sanite Belair",
+              img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Sanite-Belair.png",
+            },
             {
               name: "Toussaint Louverture",
               img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Toussaint-Louverture.png",
@@ -362,9 +381,13 @@
               name: "Jean-Jacques Dessalines",
               img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Jean-Jacques.png",
             },
-            { name: "Dutty Boukman", img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Dutty-Boukman.png" },
+            {
+              name: "Dutty Boukman",
+              img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Dutty-Boukman.png",
+            },
           ],
-          image: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746534278/Haiti.png",
+          image:
+            "https://res.cloudinary.com/da9k32mdb/image/upload/v1746534278/Haiti.png",
         },
         // Ajoutez d'autres périodes ici...
       };
@@ -392,41 +415,48 @@
 
           // 1. Remove any *currently active* animation end listener for this container
           if (container.currentAnimationEndHandler) {
-            container.removeEventListener('animationend', container.currentAnimationEndHandler);
+            container.removeEventListener(
+              "animationend",
+              container.currentAnimationEndHandler
+            );
             // Note: The animation classes are reset next, which should stop ongoing animations.
           }
 
           // 2. Reset animation classes to a clean state
-          container.classList.remove('perform-initial-zoom', 'perform-fade-in', 'perform-fade-out');
+          container.classList.remove(
+            "perform-initial-zoom",
+            "perform-fade-in",
+            "perform-fade-out"
+          );
           void container.offsetWidth; // Force a reflow to ensure class changes are processed before new animation starts
 
           // 3. Define the new handler for this click's animation sequence
           const currentHandler = function handleSingleAnimationSequence() {
-            if (container.classList.contains('perform-fade-out')) {
+            if (container.classList.contains("perform-fade-out")) {
               // Fade-out of old image just finished
               container.style.backgroundImage = `url(${newImageUrl})`; // Set the new image
-              container.classList.remove('perform-fade-out');
-              container.classList.add('perform-fade-in'); // Start fade-in of new image
-            } else if (container.classList.contains('perform-fade-in')) {
+              container.classList.remove("perform-fade-out");
+              container.classList.add("perform-fade-in"); // Start fade-in of new image
+            } else if (container.classList.contains("perform-fade-in")) {
               // Fade-in of new image just finished
-              container.classList.remove('perform-fade-in');
+              container.classList.remove("perform-fade-in");
               // Sequence complete, remove this specific listener
-              container.removeEventListener('animationend', currentHandler);
+              container.removeEventListener("animationend", currentHandler);
               // Clean up the stored handler reference if it's this one
               if (container.currentAnimationEndHandler === currentHandler) {
                 delete container.currentAnimationEndHandler;
               }
             }
           };
-          
+
           // Store a reference to the currently active handler on the container
           container.currentAnimationEndHandler = currentHandler;
 
           // 4. Start the fade-out animation for the old image
-          container.classList.add('perform-fade-out');
-          
+          container.classList.add("perform-fade-out");
+
           // 5. Add the event listener for this specific animation sequence
-          container.addEventListener('animationend', currentHandler);
+          container.addEventListener("animationend", currentHandler);
 
           // Mise à jour du contenu de .text-container
           const textContainer = document.getElementById("text-container");

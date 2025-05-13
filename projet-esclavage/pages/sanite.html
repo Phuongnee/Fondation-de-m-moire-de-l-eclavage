@@ -11,8 +11,14 @@
     <title>L'abolition de l'esclavage</title>
     <style>
       @font-face {
-        font-family: "icomoon";
-        src: url("../font/icomoon/icomoon.ttf") format("opentype"); /* Mettez à jour le chemin vers votre fichier .otf */
+        font-family: "Brother1816";
+        src: url("./font/07-brother1816-regular.otf") format("opentype"); /* Mettez à jour le chemin vers votre fichier .otf */
+        font-weight: normal;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "icomoon",sans-serif;
+        src: url("./font/icomoon/icomoon.ttf") format("truetype");
         font-weight: normal;
         font-style: normal;
       }
@@ -36,7 +42,6 @@
         text-align: center;
         overflow-y: hidden;
         opacity: 0.9;
-        
       }
       body::after {
         content: "";
@@ -282,8 +287,12 @@
       .parti-right h1 {
         font-size: 2.5rem;
         color: #281212;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         padding: 0;
+        font-family: "brother-1816", sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.2;
       }
       .parti-right h2 {
         font-size: 1rem;
@@ -293,11 +302,20 @@
         border-bottom: 2px solid #281212; /* Ligne de séparation sous le <h2> */
         padding-bottom: 10px; /* Ajouter un peu d'espace entre le texte et la ligne */
         color: #281212;
+        font-family: "icomoon", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5; 
       }
       .parti-right p {
         font-size: 1.2rem;
         margin-bottom: 20px;
         color: #281212;
+        font-family: "icomoon", sans-serif;
+        font-style: normal;
+        font-weight: 200;
+        line-height: 1.5;
+        letter-spacing: 0.03em;
       }
       .btn {
         background-color: #ff5d15;
@@ -308,6 +326,12 @@
         cursor: pointer;
         font-size: 1.2rem;
         text-decoration: none;
+        font-family: "brother-1816", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5;
+        letter-spacing: 0.03em;
+        transition: background-color 0.3s ease;
       }
       .btn a {
         color: #fff;
@@ -319,7 +343,6 @@
       .btn a:hover {
         color: #fff;
       }
-      
     </style>
   </head>
   <body>
@@ -382,10 +405,13 @@
         </div>
         <div class="parti-right">
           <h1>Dutty Bookman</h1>
-          <h2>Prêtre vaudou, initiateur de la révolution</h2>
+          <h2>Premier leader de l’insurrection haïtienne</h2>
           <p>
-            Cliquez sur les différentes périodes de la frise chronologique pour
-            explorer les événements marquants de l'abolition de l'esclavage.
+            Figure emblématique et visionnaire, Boukman est reconnu comme le
+            premier leader spirituel et l'un des instigateurs clés de
+            l'insurrection haïtienne de 1791. Son charisme et ses prêches
+            enflammés ont galvanisé les esclaves, marquant le début de la lutte
+            pour l'indépendance d'Haïti...
           </p>
           <button class="btn">
             <a href="./parallax/index.html">Explorer</a>
