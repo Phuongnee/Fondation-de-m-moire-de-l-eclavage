@@ -1,0 +1,1309 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+body {
+  background-color: #010302;
+  margin: 0;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 15px;
+  overflow-x: hidden;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+}
+.container {
+  overflow-x: hidden; /* Allow vertical overflow for sticky positioning */
+  height: max-content;
+}
+.fixedtop-timeline-container {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  padding: 20px 0;
+  max-width: 1500px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  z-index: 1000;
+  left : 50%;
+  transform: translateX(-50%);
+}
+
+.fixedtop-timeline {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  font-family: "icomoon", sans-serif;
+  font-style: normal;
+  font-size: 0.9rem;
+}
+
+.fixedtop-timeline-item {
+  display: inline-block;
+  text-align: center;
+  padding: 1rem 2rem;
+  color: #281212;
+  text-decoration: none;
+  position: relative;
+  z-index: 2;
+}
+
+.fixedtop-timeline-item.active {
+  color: #281212;
+  font-family: "icomoon", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.fixedtop-timeline-load {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: #fff3;
+  width: 0%;
+  transition: width 0.5s ease-in-out;
+}
+
+.progress-bar {
+  position: absolute;
+  bottom: -5px; /* Position juste en dessous de la barre de fixedtop-timeline */
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #281212;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.progress-bar-inner {
+  background-color: #ff5d15;
+  height: 100%;
+  width: 0%;
+  transition: width 2s ease-in-out;
+}
+
+.progress-bar-inner-after {
+  background-color: #ff5d15;
+  height: 100%;
+  width: 0%;
+}
+
+.fixedtop-timeline-item.active .fixedtop-timeline-load {
+  width: 50%;
+}
+
+.fixedtop-timeline a {
+  display: inline-block;
+  margin: 0 10px;
+  transition: color 0.3s ease-in-out;
+}
+
+.banner {
+  height: 50vw;
+  position: relative;
+  overflow: hidden;
+}
+.banner .bg-group {
+  position: relative; /* Ensure bg-group is the containing block for absolute positioned children */
+  width: 100%;
+  height: 100%;
+}
+.banner .bg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover; /* Changed from 100% to cover for better aspect ratio handling */
+  background-position: center bottom;
+  transition: transform 0.2s ease-out; /* Smooth transition for parallax effect */
+}
+.banner .bg.text-layer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 10; /* Ensure text is above most image layers but can be adjusted */
+  background-image: none !important; /* Ensure no background image is inherited or applied */
+  background-color: transparent !important; /* Ensure the layer itself is transparent */
+}
+.banner .bg.text-layer h1,
+.banner .bg.text-layer h5 {
+  color: #d1c3ae;
+  font-size: 35px;
+  margin: 0;
+  text-shadow: 0 0px 20px #d2af76;
+}
+.banner .bg.text-layer h1 {
+  font-size: 7em;
+}
+.banner .bg.fond {
+  z-index: 1; /* Lowest z-index for image layers */
+}
+
+/* Assign z-indexes to new layers to control stacking order */
+.banner .bg[style*="v1746979462/F4.png"] {
+  z-index: 2;
+} /* F4 - Furthest of new ones */
+.banner .bg[style*="v1746979463/F3.png"] {
+  z-index: 3;
+} /* F3 */
+.banner .bg[style*="v1746979577/F2.png"] {
+  z-index: 4;
+} /* F2 */
+.banner .bg[style*="v1746979462/F1.png"] {
+  z-index: 5;
+} /* F1 - Closest of new ones */
+/* Text layer (.banner .bg.text-layer) is z-index: 10, so it remains on top */
+
+.tab {
+  min-height: 100vh;
+  background-color: #010302;
+  z-index: 1;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tab::before {
+  position: absolute;
+  width: 100vw;
+  background: linear-gradient(to top, #010302, transparent);
+  content: "";
+  bottom: 100%;
+  left: 0;
+}
+.tab h2 {
+  font-size: 3.5em; /* Increased size for impact */
+  color: #e0bf71; /* Golden color for titles */
+  margin-bottom: 15px; /* Space below the title */
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Subtle text shadow */
+  line-height: 1.2;
+}
+
+.tab p,
+.tab .des p,
+.tab .subtitle,
+.tab .caption-text {
+  font-size: 1.5em; /* Standardized paragraph font size */
+  color: #f0f0f0; /* Light color for readability */
+  line-height: 1.8;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.tab .subtitle {
+  font-size: 1.8em; /* Slightly larger for subtitles */
+  color: #c0a060; /* Subdued gold for subtitles */
+  font-style: italic;
+  margin-top: -10px; /* Pull subtitle closer to title */
+  margin-bottom: 30px;
+}
+
+.tab.tab1 {
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab1.jpg);
+}
+.tab.tab1 h2 {
+  font-size: 5em;
+}
+.tab.tab2 {
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab2.jpg);
+}
+.tab.tab2 .content {
+  color: #eee;
+  width: 900px;
+  max-width: 90%;
+}
+.tab.tab2 .content .des {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.tab.tab3 {
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab3-bg.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.tab.tab3 .content {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center content vertically if tab is taller */
+  width: 1000px; /* Consistent width with other tabs */
+  max-width: 90%; /* Consistent max-width */
+  color: #eee; /* Default text color for children */
+  text-align: center; /* Default text alignment for children */
+  padding: 20px 0; /* Add some vertical padding */
+}
+
+.tab.tab3 .content .des {
+  width: 100%; /* Ensures the container takes full width for centering text if needed */
+  text-align: center; /* Explicitly center text within this div */
+}
+
+.tab.tab3 .content .des p {
+  font-size: 1.5em; /* Consistent with other descriptions like tab4, tab5 */
+  /* color: #eee;    /* Inherited from .tab.tab3 .content */
+  line-height: 1.6;
+  /* text-align: center; /* Inherited from .tab.tab3 .content */
+  margin-top: 0; /* The image image-tab3.png above has margin-bottom: 20px */
+  margin-bottom: 20px; /* Space after the description */
+}
+
+.dual-image-container {
+  display: flex; /* Allows easy centering and spacing of images */
+  justify-content: center; /* Center images horizontally */
+  align-items: center; /* Align images vertically */
+  gap: 20px; /* Space between the two images */
+  margin-bottom: 30px; /* Space below the image container */
+  position: relative; /* For potential absolute positioning of children if needed */
+  min-height: 250px; /* Ensure container has some height for visibility before images load/animate */
+  overflow: hidden; /* Add this to hide parts of images that are off-screen before animation */
+  height: 80vh;
+}
+
+.dual-image {
+  max-width: 45%; /* Adjust size as needed, allowing for tilt */
+  height: auto;
+  border: 3px solid #d1c3ae; /* Optional border */
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  opacity: 0; /* Start fully transparent */
+  /* Updated transition for smooth slide-in and fade-in */
+  transition: transform 0.8s ease-out, opacity 0.6s ease-out;
+}
+
+.p1-image {
+  /* Initial state: off-screen to the left, maintaining rotation */
+  transform: translateX(-100%) rotate(-7deg);
+}
+
+.p2-image {
+  /* Initial state: off-screen to the right, maintaining rotation */
+  transform: translateX(100%) rotate(7deg);
+}
+
+/* When the container is visible (JS adds 'is-visible' to .dual-image-container) */
+.dual-image-container.is-visible .p1-image {
+  transform: translateX(0) rotate(-7deg); /* Final position */
+  opacity: 1; /* Fade in */
+}
+
+.dual-image-container.is-visible .p2-image {
+  transform: translateX(0) rotate(7deg); /* Final position */
+  opacity: 1; /* Fade in */
+  /* transition-delay: 0.2s; */ /* Optional: slight delay for p2, uncomment if desired */
+}
+
+.tab.tab4 {
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab4-bg.png);
+  background-size: cover;
+  background-position: center;
+}
+.tab.tab4 .content {
+  display: grid;
+  grid-template-areas:
+    "text image"
+    "bottom bottom";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  width: 1000px;
+  max-width: 90%;
+  color: #eee;
+  align-items: center;
+}
+.tab.tab4 .text-content {
+  grid-area: text;
+  padding-right: 20px; /* Add some spacing between text and image */
+}
+.tab.tab4 .image-content {
+  grid-area: image;
+  text-align: center; /* Center image if it's smaller than the column */
+}
+.tab.tab4 .image-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; /* Optional: if you want rounded corners for the image */
+}
+.tab.tab4 .bottom-text {
+  grid-area: bottom;
+  text-align: center; /* Center the bottom text */
+  padding-top: 20px; /* Add some space above the bottom text */
+}
+.tab.tab4 .content p {
+  font-size: 1.5em; /* Adjust as needed */
+  color: #fff;
+  margin: 0; /* Reset default paragraph margin */
+}
+.tab.tab5 {
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab5-bg.png);
+  background-size: cover;
+  background-position: center;
+}
+.tab.tab5 .content {
+  width: 1000px;
+  max-width: 90%;
+  color: #eee;
+  text-align: center; /* Center the content */
+  display: flex;
+  flex-direction: column; /* Stack image and text vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center;
+}
+.tab.tab5 .content img {
+  max-width: 80%; /* Adjust image size as needed */
+  height: auto;
+  margin-bottom: 20px; /* Space between image and text */
+  border-radius: 8px; /* Optional: if you want rounded corners for the image */
+}
+.tab.tab5 .content p {
+  font-size: 1.5em; /* Adjust as needed */
+  color: #fff;
+  margin: 0; /* Reset default paragraph margin */
+  max-width: 800px; /* Constrain text width for readability */
+}
+.tab.tab6 {
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab6-bg.png);
+  background-size: cover;
+  background-position: center;
+}
+.tab.tab6 .content {
+  width: 1000px;
+  max-width: 90%;
+  color: #eee;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.tab.tab6 .content h2 {
+  font-size: 4em; /* Adjust as needed, existing h2 is 5em */
+  color: #d1c3ae;
+  text-shadow: 0 0px 20px #d2af76;
+  margin-bottom: 10px; /* Space between h2 and p */
+}
+.tab.tab6 .content p {
+  font-size: 1.8em; /* Adjust as needed */
+  color: #fff;
+  margin: 0;
+}
+.tab.tab7 {
+  /* No specific tab7 background image, relies on individual image containers or default tab background */
+  position: relative; /* Example, if needed for child positioning */
+}
+.tab.tab7 .content {
+  width: 100%;
+  max-width: 900px; /* Adjust overall width of the tab7 content area */
+  color: #eee;
+  display: flex;
+  flex-direction: column; /* Stack the three image-text containers vertically */
+  align-items: center;
+  padding: 40px 20px; /* Add more padding */
+  gap: 50px; /* Increased gap between items */
+}
+.tab.tab7 .image-text-container {
+  display: flex;
+  align-items: center; /* Vertically align items in the middle */
+  width: 100%;
+  gap: 30px; /* Gap between image and text */
+  opacity: 0; /* Initially hidden for fade-in */
+  transform: translateY(20px); /* Slight upward movement for entry */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.tab.tab7 .image-text-container.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tab.tab7 .image-text-container img,
+.tab.tab7 .image-text-container p {
+  flex: 1; /* Distribute space equally */
+  min-width: 0; /* Allow flex items to shrink */
+  opacity: 0; /* Children initially hidden */
+  transition: opacity 0.6s ease-out 0.3s, transform 0.6s ease-out 0.3s; /* Delayed transition for children */
+}
+
+.tab.tab7 .image-text-container.is-visible img,
+.tab.tab7 .image-text-container.is-visible p {
+  opacity: 1;
+  transform: translateX(
+    0
+  ) !important; /* Ensure it overrides initial transform */
+}
+
+.tab.tab7 .image-text-container img {
+  max-width: 100%; /* Ensure image is responsive within its flex container */
+  height: auto;
+  border-radius: 8px;
+  transform: translateX(-40px); /* Initial position for slide-in from left */
+}
+
+.tab.tab7 .image-text-container p {
+  font-size: 1.8em; /* Matched to tab6 p */
+  color: #fff;
+  text-align: left; /* Align text to the left */
+  padding: 10px;
+  transform: translateX(40px); /* Initial position for slide-in from right */
+}
+
+/* Second item: text left, image right */
+.tab.tab7 .image-text-container:nth-child(2) {
+  flex-direction: row-reverse; /* Reverse the order of items */
+}
+
+/* Adjust initial transform for reversed items so they still slide from "their" side */
+.tab.tab7 .image-text-container:nth-child(2) img {
+  transform: translateX(
+    40px
+  ); /* Initial position for slide-in from right (appears as right item) */
+}
+
+.tab.tab7 .image-text-container:nth-child(2) p {
+  transform: translateX(
+    -40px
+  ); /* Initial position for slide-in from left (appears as left item) */
+  text-align: left; /* Keep text aligned left even when on the left */
+}
+
+.tab.tab8 {
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab8-bg.png) no-repeat center center / cover;
+}
+.tab.tab8 .content {
+  width: 1000px;
+  max-width: 90%;
+  color: #eee;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+/* Styling for tab9 */
+.tab.tab9 {
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab9-bg.png) no-repeat center center / cover;
+}
+
+.tab.tab9 .content {
+  width: 1000px;
+  max-width: 80%;
+  color: #eee;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab.tab9 .content p {
+  font-size: 1.8em;
+  color: #fff;
+  margin: 0;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.tab.tab9.is-visible .content p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Styling for tab10 */
+.tab.tab10 {
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab10-bg.png) no-repeat center center / cover;
+}
+
+.tab.tab10 .content {
+  width: 100%;
+  max-width: 900px;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  gap: 50px;
+}
+
+.tab.tab10 .image-text-container {
+  /* Styles for tab10's image-text-container, similar to tab7 */
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.tab.tab10 .image-text-container.is-visible {
+  /* Corrected: .is-visible is on the container itself */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tab.tab10 .image-text-container img,
+.tab.tab10 .image-text-container p {
+  flex: 1;
+  min-width: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease-out 0.3s, transform 0.6s ease-out 0.3s;
+}
+
+.tab.tab10 .image-text-container.is-visible img, /* Corrected */
+.tab.tab10 .image-text-container.is-visible p {
+  /* Corrected */
+  opacity: 1;
+  transform: translateX(0) !important;
+}
+
+/* Styling for tab11 - Chapter Title Section */
+.tab.tab11 {
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab11-bg.png) no-repeat center center / cover;
+}
+
+.tab.tab11 .content {
+  /* Reusing styles similar to tab8 content */
+  width: 1000px;
+  max-width: 90%;
+  color: #eee;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab.tab11 .content h2 {
+  /* Adjusted to match tab8 h2 */
+  font-size: 4em;
+  color: #d1c3ae;
+  text-shadow: 0 0px 20px #d2af76;
+  margin-bottom: 10px;
+}
+
+.tab.tab11 .content .subtitle {
+  /* Adjusted to match tab8 p */
+  font-size: 1.8em;
+  color: #fff;
+  margin: 0;
+  font-style: normal; /* Removing italic to match tab8 p */
+}
+
+/* Styling for tab12 */
+.tab.tab12 {
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab12-bg.png) no-repeat center center / cover;
+  padding: 40px 20px; /* Add padding to the tab */
+  box-sizing: border-box;
+  background-color: #4a5821; /* Fallback background color */
+}
+
+.tab.tab12 .content {
+  width: 1000px;
+  max-width: 90%;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px; /* Space between content blocks */
+}
+
+.tab.tab12 .title-area {
+  text-align: center;
+  margin-bottom: 30px; /* Space after title area */
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.tab.tab12.is-visible .title-area {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tab.tab12 .title-area h2 {
+  font-size: 4em;
+  color: #d1c3ae;
+  text-shadow: 0 0px 20px #d2af76;
+  margin-bottom: 5px;
+}
+
+.tab.tab12 .title-area p.subtitle {
+  font-size: 1.8em;
+  color: #fff;
+  margin: 0;
+}
+
+.tab.tab12 .image-text-block {
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out 0.3s, transform 0.8s ease-out 0.3s; /* Added delay */
+}
+
+.tab.tab12.is-visible .image-text-block {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tab.tab12 .side-by-side {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.tab.tab12 .side-by-side p {
+  flex: 1.2;
+  font-size: 1.6em; /* Consistent with other text */
+  color: #f0f0f0;
+  line-height: 1.7;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  margin: 0; /* Remove default margin if any */
+  padding-right: 20px; /* Add some spacing if text is on left */
+}
+
+.tab.tab12 .text-block-intermediate {
+  padding: 30px;
+  border-radius: 8px;
+  margin: 30px 0; /* Space around this block */
+  opacity: 0;
+  transform: scale(0.95) translateY(20px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition-delay: 0.6s; /* Stagger animation after side-by-side */
+}
+
+.tab.tab12.is-visible .text-block-intermediate {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.tab.tab12 .text-block-intermediate p {
+  font-size: 1.7em; /* Slightly larger for emphasis */
+  color: #eaeaea;
+  line-height: 1.8;
+  text-align: center;
+  margin: 0; /* Reset margin */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.tab.tab12 .stacked-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.tab.tab12 .stacked-item img {
+  max-width: 70%; /* Adjust as needed */
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.tab.tab12 .stacked-item .caption-text {
+  font-size: 1.1em;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+.tab.tab12 .stacked-item p:not(.caption-text) {
+  font-size: 1.6em; /* Ensure consistency if other p tags are added here */
+  color: #f0f0f0;
+  line-height: 1.7;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  margin-bottom: 15px;
+}
+
+/* Styling for tab13 */
+.tab.tab13 {
+  background: linear-gradient(to top, #010302 0%, transparent 20%, #010302 80%),
+    url(images/tab13-bg.png); /* Using tab12-bg-1.png as requested */
+  background-color: #4a5821; /* Fallback background color */
+  background-size: cover;
+  background-position: center;
+}
+
+.tab.tab13 .content {
+  /* Reusing styles similar to tab9 content for centered text */
+  width: 1000px;
+  max-width: 80%;
+  color: #eee;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab.tab13 .content p {
+  /* Reusing styles similar to tab9 p */
+  font-size: 1.8em;
+  color: #fff;
+  margin: 0;
+  line-height: 1.6;
+  opacity: 0; /* Initial state for animation */
+  transform: translateY(20px); /* Initial state for animation */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.tab.tab13.is-visible .content p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Styling for tab14 */
+.tab.tab14 {
+  min-height: 200vh; /* Set height to 200vh */
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab14-bg.png);
+  background-color: #4a5821; /* Fallback background color */
+  background-size: cover;
+  background-position: center;
+  display: flex; /* Use flexbox to position children */
+  flex-direction: column; /* Stack children vertically */
+}
+
+.tab.tab14 .content {
+  flex-grow: 1; /* Allow content to fill the tab */
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  max-width: 90%;
+  color: #eee;
+  text-align: center;
+  margin: auto; /* Center content block if tab is wider */
+  padding: 40px; /* Add padding */
+}
+
+.tab.tab14 .content-top {
+  height: 100vh; /* Occupy the first 100vh (upper half) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab.tab14 .content-top h2 {
+  font-size: 4em;
+  color: #d1c3ae;
+  text-shadow: 0 0px 20px #d2af76;
+  margin-bottom: 10px;
+}
+
+.tab.tab14 .content-top p {
+  font-size: 1.8em;
+  color: #fff;
+  margin: 0;
+}
+
+.tab.tab14 .content-bottom {
+  height: 100vh; /* Occupy the second 100vh (lower half) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab.tab14 .content-bottom p {
+  font-size: 1.8em;
+  color: #fff;
+  margin: 10px 0;
+  line-height: 1.6;
+  max-width: 800px;
+}
+
+/* Styling for tab15 */
+.tab.tab15 {
+  min-height: 100vh; /* Standard tab height */
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab15-bg.png); /* Background for the tab itself */
+  background-color: #2a380a; /* Fallback background color, adjust as needed */
+  background-size: cover;
+  background-position: center;
+  display: flex; /* To center content */
+  align-items: center; /* To center content */
+  justify-content: center; /* To center content */
+  overflow: hidden; /* To contain animations if they go outside bounds initially */
+}
+
+.tab.tab15 .content {
+  width: 100%;
+  max-width: 90%; /* Adjust as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab.tab15 .content img {
+  max-width: 85%; /* Make image large */
+  max-height: 85vh; /* Prevent image from being too tall */
+  height: auto;
+  border-radius: 10px; /* Optional: adds rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Optional: adds some depth */
+  opacity: 0;
+  transform: scale(0.8) rotate(-5deg); /* Initial state for animation: slightly smaller and rotated */
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.tab.tab15.is-visible .content img {
+  opacity: 1;
+  transform: scale(1) rotate(0deg); /* Final state: full size and straight */
+}
+
+/* Styling for tab16 */
+.tab.tab16 {
+  min-height: 100vh;
+  background: linear-gradient(to top, #010302 0%, transparent 10%, #010302 90%),
+    url(images/tab16-bg.png); /* Background for the tab */
+  background-color: #1c2b0a; /* Fallback background color */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column; /* Stack title and image container vertically */
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow: hidden;
+}
+
+.tab.tab16 .content {
+  width: 100%;
+  max-width: 95%; /* Allow content to be quite wide */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.tab.tab16 .content p.tab16-title {
+  font-size: 1.8em; /* Matched with other text paragraphs */
+  color: #fff; /* Matched with other text paragraphs */
+  margin-bottom: 30px;
+  line-height: 1.6; /* Added for consistency with other paragraphs */
+}
+
+.tab.tab16 .horizontal-image-container {
+  display: flex;
+  justify-content: space-around; /* Distribute images evenly */
+  align-items: center; /* Align images vertically */
+  width: 100%;
+  gap: 15px; /* Space between images */
+}
+
+.tab.tab16 .horizontal-image-container img {
+  max-width: 32%; /* Each image takes up roughly a third of the container width */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 70vh; /* Prevent images from being excessively tall */
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transform: translateY(30px); /* Initial state for animation */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Staggered animation for images in tab16 */
+.tab.tab16.is-visible .horizontal-image-container img:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+.tab.tab16.is-visible .horizontal-image-container img:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+.tab.tab16.is-visible .horizontal-image-container img:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.6s;
+}
+
+/* Styling for tab17 */
+.tab.tab17 {
+  min-height: 100vh; /* Standard tab height */
+  background: linear-gradient(
+      to bottom,
+      #010302 0%,
+      transparent 10%,
+      #010302 90%
+    ),
+    url(images/tab17-bg.png); /* Background for the tab */
+  background-color: #0a1f2a; /* Fallback background color, adjust as needed */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow: hidden; /* Prevent content from spilling during animations */
+}
+
+.tab.tab17 .content {
+  width: 100%;
+  max-width: 800px; /* Max width for the text block */
+  color: #eee;
+  text-align: center; /* Center the text */
+}
+
+.tab.tab17 .content p {
+  font-size: 1.8em; /* Consistent with other text paragraphs */
+  color: #fff;
+  line-height: 1.7; /* Slightly more line height for readability */
+  margin: 0;
+  opacity: 0; /* Initial state for animation */
+  transform: translateY(20px); /* Initial state for animation */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.tab.tab17.is-visible .content p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Styling for tab18 */
+.tab.tab18 {
+  min-height: 300vh; /* Total height for three sections */
+  background-image: linear-gradient(
+    to top,
+    #010302 0%,
+    transparent 85%,
+    #010302 92%
+  ); /* Adjusted for thicker bottom fade and top fade transition */
+  background-color: #1e240c; /* Fallback background color as requested */
+  display: flex;
+  flex-direction: column; /* Stack content sections vertically */
+  position: relative; /* For potential z-indexing of children and pseudo-elements */
+  overflow: hidden;
+}
+
+.tab.tab18::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(images/tab18-bg.png);
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  opacity: 0.7; /* Lowered opacity for tab18-bg.png */
+  z-index: -1; /* Behind tab content and tab's direct background effects */
+}
+
+.tab.tab18 > div {
+  /* Direct children: content-s1, content-s2, content-s3 */
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* For z-indexing and absolute positioning of children */
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* Section 1: Text from former tab17, with tab17-bg.png */
+.tab.tab18 .content-s1 {
+  background-image: linear-gradient(to bottom, #010302 0%, transparent 25%),
+    url(images/tab17-bg.png); /* Gradient only at the top, made thicker */
+  background-size: cover;
+  background-position: center;
+  z-index: 2; /* Above tab18-bg */
+}
+
+.tab.tab18 .content-s1 .text-content-s1 {
+  max-width: 800px;
+  color: #eee;
+  text-align: center;
+  z-index: 3; /* Above tab17-bg */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.tab.tab18 .content-s1 .text-content-s1 p {
+  font-size: 1.8em;
+  color: #fff;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.tab.tab18 .content-s1.is-visible .text-content-s1 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section 2: Image tab18-1.png and caption */
+.tab.tab18 .content-s2 {
+  flex-direction: column; /* Stack image and caption */
+  z-index: 1; /* Below content-s1 if they were to overlap, but they are sequential */
+}
+
+.tab.tab18 .content-s2 img {
+  max-width: 60%; /* Adjust as needed */
+  max-height: 70vh;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.tab.tab18 .content-s2 p.caption {
+  font-size: 1.2em;
+  color: #ccc;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s; /* Delayed */
+}
+
+.tab.tab18 .content-s2.is-visible img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.tab.tab18 .content-s2.is-visible p.caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section 3: Image tab18-2.png and text on tab18-text-bg.png */
+.tab.tab18 .content-s3 {
+  flex-direction: row;
+  justify-content: center; /* Center the flex items (image and text block) */
+  align-items: center;
+  position: relative;
+  gap: 50px; /* Add a gap between the image and the text block */
+}
+
+.tab.tab18 .content-s3 img {
+  max-width: 40%; /* Adjusted for proportion */
+  max-height: 60vh;
+  border-radius: 8px;
+  z-index: 2;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-50px); /* Adjusted for more pronounced slide-in */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.tab.tab18 .content-s3 .text-on-bg {
+  max-width: 30%; /* Increased max-width for better balance */
+  padding: 50px; /* Symmetrical padding */
+  background-image: url(images/tab18-text-bg.png);
+  background-size: cover;
+  color: #56493a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center content */
+  align-items: center; /* Horizontally center content within the block */
+  text-align: center; /* Center text lines */
+  z-index: 1;
+  position: relative;
+  opacity: 0;
+  transform: translateX(50px); /* Adjusted for more pronounced slide-in */
+  transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s;
+  filter: drop-shadow(5px 5px 30px rgba(0, 0, 0, 0.3));
+}
+
+.tab.tab18 .content-s3 .text-on-bg p {
+  font-size: 1.5em; /* Adjust as needed */
+  line-height: 1.6;
+  margin: 0;
+  color: #56493a;
+}
+
+.tab.tab18 .content-s3.is-visible img {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.tab.tab18 .content-s3.is-visible .text-on-bg {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.tabs-with-slider-container {
+  position: relative; /* Establishes a positioning context */
+}
+
+.dual-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* Space before image-tab3.png */
+  position: relative; /* For z-index positioning */
+}
+
+.dual-image {
+  max-width: 45%; /* Adjust as needed to fit side by side */
+  height: auto;
+  transition: transform 0.3s ease, opacity 0.5s ease; /* Added opacity transition */
+}
+
+.p1-image {
+  transform: rotate(-8deg);
+  z-index: 2;
+  margin-right: -30px; /* Overlap P2 slightly */
+  opacity: 0; /* Initial state: hidden */
+}
+
+.p2-image {
+  transform: rotate(5deg);
+  z-index: 1;
+  opacity: 0; /* Initial state: hidden */
+}
+
+.content h2 {
+  font-size: 5em;
+  color: #d1c3ae;
+  text-shadow: 0 0px 20px #d2af76;
+}
+.des p {
+  font-size: 2em;
+  color: #fff;
+}
+
+#timeline-slider {
+  writing-mode: vertical-lr;
+  -webkit-appearance: slider-vertical;
+  appearance: slider-vertical; /* Added standard property */
+  width: 10px;
+  height: 100%;
+  background: transparent;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide {
+  position: absolute;
+  max-width: 40%; /* ajuste selon besoin */
+  height: auto;
+  opacity: 0; /* Caché par défaut */
+  transform: scale(0); /* Réduit à 0 par défaut */
+  transition: opacity 0.6s ease, transform 0.6s ease, top 0.6s ease,
+    left 0.6s ease; /* Ajout transition top/left */
+  z-index: 0;
+  pointer-events: none;
+  /* Supprimer left/bottom ici, sera géré par active/inactive */
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(var(--angle)); /* Transform pour l'image active */
+  left: var(--left); /* Positionnement dynamique */
+  bottom: var(--bottom); /* Positionnement dynamique */
+  top: auto; /* Assurer que top n'interfère pas */
+  z-index: 2; /* Au-dessus des inactives */
+  pointer-events: auto;
+}
+
+.slide.inactive {
+  opacity: 1; /* Légèrement plus transparent */
+  transform: scale(1); /* Légèrement plus petit */
+  max-width: 100%; /* Réduire la largeur maximale pour les inactives */
+  /* Positionnement dans le coin supérieur gauche par défaut, sera ajusté par JS */
+  top: 20px;
+  left: 20px;
+  bottom: auto; /* Assurer que bottom n'interfère pas */
+  z-index: 1; /* Derrière l'active, mais visible */
+  pointer-events: none;
+}
+
+/* Vertical Timeline Styles */
+.timeline-container {
+  position: fixed;
+  right: 30px; /* Adjust as needed */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000; /* Ensure it's above other content */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+}
+
+.oval-image-container {
+  width: 80px; /* Adjust size as needed */
+  height: 100px; /* Adjust size as needed */
+  border-radius: 50%; /* Makes the container oval/circular */
+  overflow: hidden; /* Clips the image to the oval shape */
+  margin-bottom: 15px; /* Space between image and timeline */
+  border: 2px solid #d1c3ae; /* Optional border */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border: #ff5d15 solid 2px; /* Border color */
+}
+
+.oval-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the oval area, might crop */
+}
+
+.vertical-timeline {
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.vertical-timeline ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.vertical-timeline li {
+  margin-bottom: 10px;
+}
+
+.vertical-timeline li a {
+  justify-content: center;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  padding: 8px;
+  display: flex;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.vertical-timeline li a:hover,
+.vertical-timeline li a.active {
+  background-color: #555;
+  color: #fff;
+}

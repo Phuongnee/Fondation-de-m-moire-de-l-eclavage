@@ -24,7 +24,6 @@
         color: White;
         transition: background-color 0.5s ease;
         overflow-x: hidden; /* Empêche le défilement horizontal */
-        cursor: none;
         background: url("../images/back-ground.jpg") no-repeat center center
           fixed;
         background-size: cover; /* L'image couvre toute la zone */
@@ -42,7 +41,6 @@
         opacity: 1; /* Ajustez l'opacité selon vos besoins */
         pointer-events: none; /* Empêche les interactions avec le pseudo-élément */
         z-index: -2;
-        cursor: none;
       }
 
       /* Entête - position fixe en haut */
@@ -96,7 +94,6 @@
         justify-content: center;
         align-items: center;
         left: 0; /* Positionnement standard */
-        transition: background-image 1s ease-in-out;
       }
 
       /* Thêm viền texture bằng pseudo-element */
@@ -251,6 +248,40 @@
       .discover-btn:hover {
         background-color: #4c3626;;
       }
+
+      /* Added for new image transition effects */
+      @keyframes zoomInEffect {
+        from {
+          background-size: 150%; /* Start larger to "zoom in" to cover */
+          opacity: 0; /* Start transparent for fade-in effect */
+        }
+        to {
+          background-size: cover;
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeOutEffect {
+        from { opacity: 1; }
+        to { opacity: 0; }
+      }
+
+      @keyframes fadeInEffect {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .perform-initial-zoom {
+        animation: zoomInEffect 0.7s ease-out forwards;
+      }
+
+      .perform-fade-out {
+        animation: fadeOutEffect 1.5s ease-in-out forwards;
+      }
+
+      .perform-fade-in {
+        animation: fadeInEffect 0.5s ease-in-out forwards;
+      }
     </style>
   </head>
   <body>
@@ -290,7 +321,7 @@
 
     <script>
       const container = document.getElementById("circle");
-      const labels = ["I", "II", "IV", "V", "VI", "VII", "IX", "X"];
+      const labels = ["II", "III", "IV", "V", "VI", "VII", "IX", "I"];
       const radius = 327; // Ajuste le rayon pour que les boutons soient dans un cercle plus grand
       const centerX = 300, // Déplace le centre vers la gauche
         centerY = 300;
@@ -306,7 +337,7 @@
             { name: "Sanite Belair", img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Sanite-Belair.png" },
             {
               name: "Toussaint Louverture",
-              img: "../images/Toussaint-Louverture.png",
+              img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Toussaint-Louverture.png",
             },
             {
               name: "Jean-Jacques Dessalines",
@@ -314,7 +345,7 @@
             },
             { name: "Dutty Boukman", img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Dutty-Boukman.png" },
           ],
-          image: "../images/haiti.png",
+          image: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746534278/Haiti.png",
         },
         II: {
           title: "5e – 15e siècle",
@@ -333,7 +364,7 @@
             },
             { name: "Dutty Boukman", img: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746533927/Dutty-Boukman.png" },
           ],
-          image: "../images/haiti.png",
+          image: "https://res.cloudinary.com/da9k32mdb/image/upload/v1746534278/Haiti.png",
         },
         // Ajoutez d'autres périodes ici...
       };
@@ -353,9 +384,49 @@
         button.addEventListener("click", () => {
           // Récupérer le contenu de la période sélectionnée
           const periodContent = content[label];
+          const newImageUrl = periodContent.image; // For clarity and preloading
 
-          // Mise à jour de l'image de fond de .circle-container
-          container.style.backgroundImage = `url(${periodContent.image})`;
+          // Start preloading the new image immediately
+          const preloader = new Image();
+          preloader.src = newImageUrl;
+
+          // 1. Remove any *currently active* animation end listener for this container
+          if (container.currentAnimationEndHandler) {
+            container.removeEventListener('animationend', container.currentAnimationEndHandler);
+            // Note: The animation classes are reset next, which should stop ongoing animations.
+          }
+
+          // 2. Reset animation classes to a clean state
+          container.classList.remove('perform-initial-zoom', 'perform-fade-in', 'perform-fade-out');
+          void container.offsetWidth; // Force a reflow to ensure class changes are processed before new animation starts
+
+          // 3. Define the new handler for this click's animation sequence
+          const currentHandler = function handleSingleAnimationSequence() {
+            if (container.classList.contains('perform-fade-out')) {
+              // Fade-out of old image just finished
+              container.style.backgroundImage = `url(${newImageUrl})`; // Set the new image
+              container.classList.remove('perform-fade-out');
+              container.classList.add('perform-fade-in'); // Start fade-in of new image
+            } else if (container.classList.contains('perform-fade-in')) {
+              // Fade-in of new image just finished
+              container.classList.remove('perform-fade-in');
+              // Sequence complete, remove this specific listener
+              container.removeEventListener('animationend', currentHandler);
+              // Clean up the stored handler reference if it's this one
+              if (container.currentAnimationEndHandler === currentHandler) {
+                delete container.currentAnimationEndHandler;
+              }
+            }
+          };
+          
+          // Store a reference to the currently active handler on the container
+          container.currentAnimationEndHandler = currentHandler;
+
+          // 4. Start the fade-out animation for the old image
+          container.classList.add('perform-fade-out');
+          
+          // 5. Add the event listener for this specific animation sequence
+          container.addEventListener('animationend', currentHandler);
 
           // Mise à jour du contenu de .text-container
           const textContainer = document.getElementById("text-container");

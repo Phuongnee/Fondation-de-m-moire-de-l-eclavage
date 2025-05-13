@@ -113,7 +113,6 @@
       }
       .container {
         width: 100%; /* S'assurer que le conteneur occupe toute la largeur */
-        margin-top: 80px;
         padding: 0; /* Supprimer toute marge interne */
         justify-content: center;
         align-items: center;
@@ -240,7 +239,7 @@
       }
 
 
-      .timeline-container {
+      .fixedtop-timeline-container {
         position: relative;
         width: 100%;
         padding: 20px 0;
@@ -249,7 +248,7 @@
         overflow: hidden;
       }
 
-      .timeline {
+      .fixedtop-timeline {
         display: flex;
         justify-content: center;
         position: relative;
@@ -261,7 +260,7 @@
         margin-top: 80px;
       }
 
-      .timeline-item {
+      .fixedtop-timeline-item {
         display: inline-block;
         text-align: center;
         padding: 1rem 2rem;
@@ -271,7 +270,7 @@
         z-index: 2;
       }
 
-      .timeline-item.active {
+      .fixedtop-timeline-item.active {
         color: #281212;
         font-family: "icomoon", sans-serif;
         font-style: normal;
@@ -279,7 +278,7 @@
         font-size: 0.9rem;
       }
 
-      .timeline-load {
+      .fixedtop-timeline-load {
         position: absolute;
         bottom: 0;
         left: 0;
@@ -292,7 +291,7 @@
 
       .progress-bar {
         position: absolute;
-        bottom: -5px; /* Position juste en dessous de la barre de timeline */
+        bottom: -5px; /* Position juste en dessous de la barre de fixedtop-timeline */
         left: 0;
         width: 100%;
         height: 4px;
@@ -314,17 +313,17 @@
         width: 0%;
       }
 
-      .timeline-item.active .timeline-load {
+      .fixedtop-timeline-item.active .fixedtop-timeline-load {
         width: 50%;
       }
 
-      .timeline a {
+      .fixedtop-timeline a {
         display: inline-block;
         margin: 0 10px;
         transition: color 0.3s ease-in-out;
       }
 
-      .timeline a:hover {
+      .fixedtop-timeline a:hover {
         
       }
       /* Style des boutons avec les icônes */
@@ -357,41 +356,41 @@
     </style>
   </head>
   <body>
-    <section class="timeline-container">
-        <div class="timeline">
-          <a href="#1971" class="timeline-item" data-year="1971">
+    <section class="fixedtop-timeline-container">
+        <div class="fixedtop-timeline">
+          <a href="#1971" class="fixedtop-timeline-item" data-year="1971">
             <div>1990s – aujourd’hui</div>
-            <div class="timeline-load" id="load-1971"></div>
+            <div class="fixedtop-timeline-load" id="load-1971"></div>
             <div class="progress-bar" id="progress-1971"></div>
           </a>
-          <a href="#1975" class="timeline-item" data-year="1975">
+          <a href="#1975" class="fixedtop-timeline-item" data-year="1975">
             <div>5e – 15e siècle</div>
-            <div class="timeline-load" id="load-1975"></div>
+            <div class="fixedtop-timeline-load" id="load-1975"></div>
             <div class="progress-bar" id="progress-1975"></div>
           </a>
-          <a href="#1976" class="timeline-item" data-year="1976">
+          <a href="#1976" class="fixedtop-timeline-item" data-year="1976">
             <div>16e – 17e siècle</div>
-            <div class="timeline-load" id="load-1976"></div>
+            <div class="fixedtop-timeline-load" id="load-1976"></div>
             <div class="progress-bar" id="progress-1976"></div>
           </a>
-          <a href="#2006" class="timeline-item" data-year="2006">
+          <a href="#2006" class="fixedtop-timeline-item" data-year="2006">
             <div>1789 – 1802</div>
-            <div class="timeline-load" id="load-2006"></div>
+            <div class="fixedtop-timeline-load" id="load-2006"></div>
             <div class="progress-bar" id="progress-2006"></div>
           </a>
-          <a href="#2013" class="timeline-item active" data-year="2013">
+          <a href="#2013" class="fixedtop-timeline-item active" data-year="2013">
             <div>1802 – 1848</div>
-            <div class="timeline-load" id="load-2013"></div>
+            <div class="fixedtop-timeline-load" id="load-2013"></div>
             <div class="progress-bar" id="progress-2013"></div>
           </a>
-          <a href="#2018" class="timeline-item" data-year="2018">
+          <a href="#2018" class="fixedtop-timeline-item" data-year="2018">
             <div>1848 – fin 19e siècle</div>
-            <div class="timeline-load" id="load-2018"></div>
+            <div class="fixedtop-timeline-load" id="load-2018"></div>
             <div class="progress-bar" id="progress-2018"></div>
           </a>
-          <a href="#2020" class="timeline-item" data-year="2020">
+          <a href="#2020" class="fixedtop-timeline-item" data-year="2020">
             <div>mi 20e siècle – 1980s</div>
-            <div class="timeline-load" id="load-2020"></div>
+            <div class="fixedtop-timeline-load" id="load-2020"></div>
             <div class="progress-bar" id="progress-2020"></div>
           </a>
         </div>
@@ -541,7 +540,7 @@
       });
 
       let currentIndex = 0;
-      const items = document.querySelectorAll(".timeline-item");
+      const items = document.querySelectorAll(".fixedtop-timeline-item");
 
       function setActive(index) {
         items.forEach((item, i) => {
