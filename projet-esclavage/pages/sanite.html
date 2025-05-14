@@ -17,7 +17,7 @@
         font-style: normal;
       }
       @font-face {
-        font-family: "icomoon",sans-serif;
+        font-family: "icomoon", sans-serif;
         src: url("./font/icomoon/icomoon.ttf") format("truetype");
         font-weight: normal;
         font-style: normal;
@@ -305,7 +305,7 @@
         font-family: "icomoon", sans-serif;
         font-style: normal;
         font-weight: 400;
-        line-height: 1.5; 
+        line-height: 1.5;
       }
       .parti-right p {
         font-size: 1.2rem;
@@ -419,32 +419,48 @@
         </div>
       </div>
     </section>
-
     <script>
-      // Fonction pour gérer le clic sur les éléments de la timeline
-
-      let currentIndex = 0;
+      let currentIndex = 0; // Sera mis à jour si l'année cible est trouvée
       const items = document.querySelectorAll(".timeline-item");
+      const defaultYearToActivate = "2006"; // L'année que vous voulez activer par défaut
+
+      // Trouver l'index de l'élément avec data-year="2006"
+      items.forEach((item, index) => {
+        if (item.dataset.year === defaultYearToActivate) {
+          currentIndex = index;
+        }
+      });
 
       function setActive(index) {
-        items.forEach((item, i) => {
+        // D'abord, désactiver tous les éléments
+        items.forEach((item) => {
           item.classList.remove("active");
-          document.getElementById("load-" + item.dataset.year).style.width =
-            "0%";
+          const loadDiv = document.getElementById("load-" + item.dataset.year);
+          if (loadDiv) {
+            loadDiv.style.width = "0%";
+          }
           const progressBar = item.querySelector(".progress-bar-inner");
-          if (progressBar) progressBar.style.width = "0%";
+          if (progressBar) {
+            progressBar.style.width = "0%";
+          }
         });
 
-        items[index].classList.add("active");
-        document.getElementById(
-          "load-" + items[index].dataset.year
-        ).style.width = "50%";
+        // Ensuite, activer l'élément cible s'il existe
+        if (items[index]) {
+          items[index].classList.add("active");
+          const activeLoadDiv = document.getElementById(
+            "load-" + items[index].dataset.year
+          );
+          if (activeLoadDiv) {
+            activeLoadDiv.style.width = "50%";
+          }
 
-        const activeProgressBar = items[index].querySelector(
-          ".progress-bar-inner"
-        );
-        if (activeProgressBar) {
-          activeProgressBar.style.width = "100%"; // Remplir la barre de progression
+          const activeProgressBar = items[index].querySelector(
+            ".progress-bar-inner"
+          );
+          if (activeProgressBar) {
+            activeProgressBar.style.width = "100%"; // Remplir la barre de progression
+          }
         }
       }
 
@@ -456,14 +472,20 @@
         });
       });
 
-      // Créer la barre de progression pour chaque année
+      // Créer la barre de progression pour chaque année, si elle n'existe pas déjà
       items.forEach((item) => {
-        const progressBar = document.createElement("div");
-        progressBar.classList.add("progress-bar-inner");
-        item.querySelector(".progress-bar").appendChild(progressBar);
+        const progressBarContainer = item.querySelector(".progress-bar");
+        if (
+          progressBarContainer &&
+          !progressBarContainer.querySelector(".progress-bar-inner")
+        ) {
+          const progressBar = document.createElement("div");
+          progressBar.classList.add("progress-bar-inner");
+          progressBarContainer.appendChild(progressBar);
+        }
       });
 
-      // Initialiser avec le premier élément actif
+      // Initialiser avec l'élément actif (qui pourrait être celui avec data-year="2006")
       setActive(currentIndex);
     </script>
   </body>

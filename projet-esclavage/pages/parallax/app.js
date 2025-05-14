@@ -65,7 +65,10 @@ smoothScrollLoop();
 
 const elementsToAnimateOnScroll = document.querySelectorAll(
   ".tab.tab3 .dual-image-container, " +
-    ".tab.tab7 .image-text-container, " +
+  ".tab.tab4, " +
+    ".tab.tab5 .image-text-container, " +
+    ".tab.tab7 .image-text-container, " + // Les conteneurs image-texte existants
+    ".tab.tab7 .text-on-bg, " + 
     ".tab.tab9, " + // Added .tab.tab9
     ".tab.tab10 .image-text-container, " +
     ".tab.tab12, " +
@@ -149,47 +152,70 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  const observer = new IntersectionObserver(observerCallback, observerOptions);
+ // ...existing code...
+ const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-  chapters.forEach((chapter) => {
-    observer.observe(chapter);
-  });
-  let currentIndex = 0;
-  const items = document.querySelectorAll(".fixedtop-timeline-item");
+ chapters.forEach((chapter) => {
+   observer.observe(chapter);
+ });
+ let currentIndex = 0; // Default to 0, will be updated if "2006" is found
+ const items = document.querySelectorAll(".fixedtop-timeline-item");
 
-  function setActive(index) {
-    items.forEach((item, i) => {
-      item.classList.remove("active");
-      document.getElementById("load-" + item.dataset.year).style.width = "0%";
-      const progressBar = item.querySelector(".progress-bar-inner");
-      if (progressBar) progressBar.style.width = "0%";
-    });
+ // Find the index of the item with data-year="2006" to set as default
+ items.forEach((item, index) => {
+   if (item.dataset.year === "2006") {
+     currentIndex = index;
+   }
+ });
 
-    items[index].classList.add("active");
-    document.getElementById("load-" + items[index].dataset.year).style.width =
-      "50%";
+ function setActive(index) {
+   items.forEach((item, i) => {
+     item.classList.remove("active");
+     const loadDiv = document.getElementById("load-" + item.dataset.year);
+     if (loadDiv) { // Check if loadDiv exists
+       loadDiv.style.width = "0%";
+     }
+     const progressBar = item.querySelector(".progress-bar-inner");
+     if (progressBar) progressBar.style.width = "0%";
+   });
 
-    const activeProgressBar = items[index].querySelector(".progress-bar-inner");
-    if (activeProgressBar) {
-      activeProgressBar.style.width = "100%"; // Remplir la barre de progression
-    }
-  }
+   if (items[index]) { // Check if the item at the target index exists
+     items[index].classList.add("active");
+     const activeLoadDiv = document.getElementById(
+       "load-" + items[index].dataset.year
+     );
+     if (activeLoadDiv) { // Check if activeLoadDiv exists
+       activeLoadDiv.style.width = "50%";
+     }
 
-  items.forEach((item, index) => {
-    item.addEventListener("click", (e) => {
-      e.preventDefault();
-      currentIndex = index;
-      setActive(index);
-    });
-  });
+     const activeProgressBar = items[index].querySelector(
+       ".progress-bar-inner"
+     );
+     if (activeProgressBar) {
+       activeProgressBar.style.width = "100%"; // Remplir la barre de progression
+     }
+   }
+ }
 
-  // Créer la barre de progression pour chaque année
-  items.forEach((item) => {
-    const progressBar = document.createElement("div");
-    progressBar.classList.add("progress-bar-inner");
-    item.querySelector(".progress-bar").appendChild(progressBar);
-  });
+ items.forEach((item, index) => {
+   item.addEventListener("click", (e) => {
+     e.preventDefault();
+     currentIndex = index;
+     setActive(index);
+   });
+ });
 
-  // Initialiser avec le premier élément actif
-  setActive(currentIndex);
+ // Créer la barre de progression pour chaque année
+ items.forEach((item) => {
+   const progressBarContainer = item.querySelector(".progress-bar");
+   // Check if progress-bar-inner already exists to prevent duplicates
+   if (progressBarContainer && !progressBarContainer.querySelector(".progress-bar-inner")) {
+     const progressBar = document.createElement("div");
+     progressBar.classList.add("progress-bar-inner");
+     progressBarContainer.appendChild(progressBar);
+   }
+ });
+
+ // Initialiser avec l'élément actif par défaut (qui sera "2006" si trouvé)
+ setActive(currentIndex);
 });

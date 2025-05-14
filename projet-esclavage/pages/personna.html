@@ -440,8 +440,8 @@
                 alt="Toussaint Louverture"
               />
               <div class="text-card">
-                <h2>Sanite Belair</h2>
-                <p>Lieutenante de l'armée révolutionnaire haïtienne</p>
+                <h2>Toussaint Louverture</h2>
+                <p>Leader de la Révolution haïtienne</p>
               </div>
             </div>
             <div class="character-card">
@@ -450,8 +450,8 @@
                 alt="Jean-Jacques Dessalines"
               />
               <div class="text-card">
-                <h2>Sanite Belair</h2>
-                <p>Lieutenante de l'armée révolutionnaire haïtienne</p>
+                <h2>Jean-Jacques</h2>
+                <p>Chef militaire de la Révolution haïtienne</p>
               </div>
             </div>
             <div class="character-card">
@@ -461,14 +461,15 @@
                   alt="Dutty Boukman"
               /></a>
               <div class="text-card">
-                <h2>Sanite Belair</h2>
-                <p>Lieutenante de l'armée révolutionnaire haïtienne</p>
+                <h2>Dutty Boukman</h2>
+                <p>Premier leader de l’insurrection haïtienne</p>
               </div>
             </div>
-            <div
-              class="character-card"
-            >
-              <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534666/P1.jpg" alt="Dutty Boukman" />
+            <div class="character-card">
+              <img
+                src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534666/P1.jpg"
+                alt="Dutty Boukman"
+              />
               <p>Dutty Boukman</p>
             </div>
             <div class="character-card">
@@ -497,104 +498,132 @@
     </div>
 
     <script>
-      const prevButton = document.querySelector(".prev");
-      const nextButton = document.querySelector(".next");
-      const charactersContainer = document.querySelector(".characters");
+      // ...existing code...
+      document.addEventListener("DOMContentLoaded", () => {
+        const timelineLinks = document.querySelectorAll(".vertical-timeline a");
+        const chapters = document.querySelectorAll('[id^="chapter"]');
 
-      // Fonction pour activer/désactiver les boutons en fonction de la position du scroll
-      function updateButtons() {
-        const maxScroll =
-          charactersContainer.scrollWidth - charactersContainer.clientWidth;
-        prevButton.disabled = charactersContainer.scrollLeft <= 0;
-        nextButton.disabled = charactersContainer.scrollLeft >= maxScroll;
-      }
-
-      // Event listeners pour les boutons
-      prevButton.addEventListener("click", () => {
-        charactersContainer.scrollBy({
-          left: -300, // Défile de 300px vers la gauche
-          behavior: "smooth", // Défilement fluide
-        });
-        updateButtons();
-      });
-
-      nextButton.addEventListener("click", () => {
-        charactersContainer.scrollBy({
-          left: 300, // Défile de 300px vers la droite
-          behavior: "smooth", // Défilement fluide
-        });
-        updateButtons();
-      });
-
-      // Mise à jour de l'état des boutons au chargement et lors du défilement
-      updateButtons();
-
-      // Event listeners pour le défilement manuel de la galerie
-      charactersContainer.addEventListener("scroll", updateButtons);
-
-      // Fonction pour gérer le survol des cartes de personnages
-      const characterCards = document.querySelectorAll(".character-card");
-
-      characterCards.forEach((card) => {
-        card.addEventListener("mouseenter", () => {
-          // Quand on survole une carte, on applique 'not-hovered' aux autres cartes
-          characterCards.forEach((otherCard) => {
-            if (otherCard !== card) {
-              otherCard.classList.add("not-hovered");
+        // Smooth scroll for timeline links
+        timelineLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              // Calculate the target scroll position relative to the document top
+              const targetPosition =
+                targetElement.getBoundingClientRect().top + window.scrollY;
+              // Update the targetScrollY of your custom smooth scroll
+              targetScrollY = targetPosition;
+              // The custom smoothScrollLoop will now handle scrolling to this position
             }
           });
         });
 
-        card.addEventListener("mouseleave", () => {
-          // Quand on quitte le survol d'une carte, on retire 'not-hovered' de toutes les cartes
-          characterCards.forEach((otherCard) => {
-            otherCard.classList.remove("not-hovered");
+        // Highlight active timeline link on scroll
+        const observerOptionsHighlight = {
+          // Renamed to avoid conflict
+          root: null, // relative to document viewport
+          rootMargin: "0px",
+          threshold: 0.5, // 50% of the element is visible
+        };
+
+        const observerCallbackHighlight = (entries, observer) => {
+          // Renamed to avoid conflict
+          entries.forEach((entry) => {
+            const correspondingLink = document.querySelector(
+              `.vertical-timeline a[href="#${entry.target.id}"]`
+            );
+            if (entry.isIntersecting) {
+              // Remove active class from all links
+              timelineLinks.forEach((link) => link.classList.remove("active"));
+              // Add active class to the current link
+              if (correspondingLink) {
+                correspondingLink.classList.add("active");
+              }
+            } else {
+              if (correspondingLink) {
+                correspondingLink.classList.remove("active");
+              }
+            }
+          });
+        };
+
+        const highlightObserver = new IntersectionObserver(
+          observerCallbackHighlight,
+          observerOptionsHighlight
+        ); // Renamed to avoid conflict
+
+        chapters.forEach((chapter) => {
+          highlightObserver.observe(chapter);
+        });
+
+        const items = document.querySelectorAll(".fixedtop-timeline-item");
+        let currentIndex = 0; // Default to 0
+
+        // Find the index of the item with data-year="2006" to set as default
+        items.forEach((item, index) => {
+          if (item.dataset.year === "2006") {
+            currentIndex = index;
+          }
+        });
+
+        function setActive(index) {
+          items.forEach((item, i) => {
+            item.classList.remove("active");
+            const loadDiv = document.getElementById(
+              "load-" + item.dataset.year
+            );
+            if (loadDiv) {
+              loadDiv.style.width = "0%";
+            }
+            const progressBar = item.querySelector(".progress-bar-inner");
+            if (progressBar) progressBar.style.width = "0%";
+          });
+
+          if (items[index]) {
+            items[index].classList.add("active");
+            const activeLoadDiv = document.getElementById(
+              "load-" + items[index].dataset.year
+            );
+            if (activeLoadDiv) {
+              activeLoadDiv.style.width = "50%";
+            }
+
+            const activeProgressBar = items[index].querySelector(
+              ".progress-bar-inner"
+            );
+            if (activeProgressBar) {
+              activeProgressBar.style.width = "100%"; // Remplir la barre de progression
+            }
+          }
+        }
+
+        items.forEach((item, index) => {
+          item.addEventListener("click", (e) => {
+            e.preventDefault();
+            currentIndex = index;
+            setActive(index);
           });
         });
-      });
 
-      let currentIndex = 0;
-      const items = document.querySelectorAll(".fixedtop-timeline-item");
-
-      function setActive(index) {
-        items.forEach((item, i) => {
-          item.classList.remove("active");
-          document.getElementById("load-" + item.dataset.year).style.width =
-            "0%";
-          const progressBar = item.querySelector(".progress-bar-inner");
-          if (progressBar) progressBar.style.width = "0%";
+        // Créer la barre de progression pour chaque année
+        items.forEach((item) => {
+          const progressBarContainer = item.querySelector(".progress-bar");
+          // Check if progress-bar-inner already exists to prevent duplicates
+          if (
+            progressBarContainer &&
+            !progressBarContainer.querySelector(".progress-bar-inner")
+          ) {
+            const progressBar = document.createElement("div");
+            progressBar.classList.add("progress-bar-inner");
+            progressBarContainer.appendChild(progressBar);
+          }
         });
 
-        items[index].classList.add("active");
-        document.getElementById(
-          "load-" + items[index].dataset.year
-        ).style.width = "50%";
-
-        const activeProgressBar = items[index].querySelector(
-          ".progress-bar-inner"
-        );
-        if (activeProgressBar) {
-          activeProgressBar.style.width = "100%"; // Remplir la barre de progression
-        }
-      }
-
-      items.forEach((item, index) => {
-        item.addEventListener("click", (e) => {
-          e.preventDefault();
-          currentIndex = index;
-          setActive(index);
-        });
+        // Initialiser avec l'élément actif par défaut
+        setActive(currentIndex);
       });
-
-      // Créer la barre de progression pour chaque année
-      items.forEach((item) => {
-        const progressBar = document.createElement("div");
-        progressBar.classList.add("progress-bar-inner");
-        item.querySelector(".progress-bar").appendChild(progressBar);
-      });
-
-      // Initialiser avec le premier élément actif
-      setActive(currentIndex);
     </script>
   </body>
 </html>
