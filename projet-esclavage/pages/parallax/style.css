@@ -10,13 +10,29 @@ body {
 *::-webkit-scrollbar {
   width: 0;
 }
+
+header {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  position: fixed;
+  top: 30px;
+  left: 50px;
+  width: 90%;
+  z-index: 10;
+}
+
+header .logo img {
+  height: 100px; /* Taille du logo */
+}
+
 .container {
   overflow-x: hidden; /* Allow vertical overflow for sticky positioning */
   height: max-content;
 }
 .fixedtop-timeline-container {
   position: absolute;
-  top: 0px;
+  top: 10px;
   width: 100%;
   padding: 20px 0;
   max-width: 1500px;
