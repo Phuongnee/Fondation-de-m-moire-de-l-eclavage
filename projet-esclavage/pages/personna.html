@@ -498,6 +498,61 @@
     </div>
 
     <script>
+      const prevButton = document.querySelector(".prev");
+      const nextButton = document.querySelector(".next");
+      const charactersContainer = document.querySelector(".characters");
+
+      // Fonction pour activer/désactiver les boutons en fonction de la position du scroll
+      function updateButtons() {
+        const maxScroll =
+          charactersContainer.scrollWidth - charactersContainer.clientWidth;
+        prevButton.disabled = charactersContainer.scrollLeft <= 0;
+        nextButton.disabled = charactersContainer.scrollLeft >= maxScroll;
+      }
+
+      // Event listeners pour les boutons
+      prevButton.addEventListener("click", () => {
+        charactersContainer.scrollBy({
+          left: -300, // Défile de 300px vers la gauche
+          behavior: "smooth", // Défilement fluide
+        });
+        updateButtons();
+      });
+
+      nextButton.addEventListener("click", () => {
+        charactersContainer.scrollBy({
+          left: 300, // Défile de 300px vers la droite
+          behavior: "smooth", // Défilement fluide
+        });
+        updateButtons();
+      });
+
+      // Mise à jour de l'état des boutons au chargement et lors du défilement
+      updateButtons();
+
+      // Event listeners pour le défilement manuel de la galerie
+      charactersContainer.addEventListener("scroll", updateButtons);
+
+      // Fonction pour gérer le survol des cartes de personnages
+      const characterCards = document.querySelectorAll(".character-card");
+
+      characterCards.forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          // Quand on survole une carte, on applique 'not-hovered' aux autres cartes
+          characterCards.forEach((otherCard) => {
+            if (otherCard !== card) {
+              otherCard.classList.add("not-hovered");
+            }
+          });
+        });
+
+        card.addEventListener("mouseleave", () => {
+          // Quand on quitte le survol d'une carte, on retire 'not-hovered' de toutes les cartes
+          characterCards.forEach((otherCard) => {
+            otherCard.classList.remove("not-hovered");
+          });
+        });
+      });
       // ...existing code...
       document.addEventListener("DOMContentLoaded", () => {
         const timelineLinks = document.querySelectorAll(".vertical-timeline a");
