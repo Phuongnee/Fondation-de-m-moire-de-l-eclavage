@@ -152,7 +152,7 @@ header nav ul li a {
 }
 
 .scroll-indicator img {
-  width: 50px; /* Taille de l'icône */
+  width: 60px; /* Taille de l'icône */
   margin-bottom: 5px; /* Espacement entre l'icône et la flèche */
   animation: pulse 1.5s infinite ease-in-out; /* Animation de pulsation */
 }
@@ -162,7 +162,7 @@ header nav ul li a {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.5); /* L'icône devient légèrement plus grande */
+    transform: scale(2); /* L'icône devient légèrement plus grande */
   }
   100% {
     transform: scale(1);
