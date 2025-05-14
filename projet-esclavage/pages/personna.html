@@ -44,10 +44,15 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(212, 212, 212, 0.5); /* Couleur de fond blanche avec opacité */
+        background-color: rgba(
+          212,
+          212,
+          212,
+          0.5
+        ); /* Couleur de fond blanche avec opacité */
         z-index: -1; /* Placer derrière le contenu */
       }
-    
+
       header {
         display: flex;
         justify-content: space-between;
@@ -212,7 +217,6 @@
         text-align: center;
         margin-top: 20px;
         max-width: 280px; /* Limiter la largeur du texte */
-
       }
       .character-card h2 {
         font-size: 1.5em;
@@ -237,7 +241,6 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
-
 
       .fixedtop-timeline-container {
         position: relative;
@@ -301,14 +304,14 @@
       }
 
       .progress-bar-inner {
-        background-color: #FF5D15;
+        background-color: #ff5d15;
         height: 100%;
         width: 0%;
         transition: width 2s ease-in-out;
       }
 
       .progress-bar-inner-after {
-        background-color: #FF5D15;
+        background-color: #ff5d15;
         height: 100%;
         width: 0%;
       }
@@ -324,7 +327,6 @@
       }
 
       .fixedtop-timeline a:hover {
-        
       }
       /* Style des boutons avec les icônes */
       /* Positionnement des boutons à l'intérieur de .characters */
@@ -357,44 +359,44 @@
   </head>
   <body>
     <section class="fixedtop-timeline-container">
-        <div class="fixedtop-timeline">
-          <a href="#1971" class="fixedtop-timeline-item" data-year="1971">
-            <div>1990s – aujourd’hui</div>
-            <div class="fixedtop-timeline-load" id="load-1971"></div>
-            <div class="progress-bar" id="progress-1971"></div>
-          </a>
-          <a href="#1975" class="fixedtop-timeline-item" data-year="1975">
-            <div>5e – 15e siècle</div>
-            <div class="fixedtop-timeline-load" id="load-1975"></div>
-            <div class="progress-bar" id="progress-1975"></div>
-          </a>
-          <a href="#1976" class="fixedtop-timeline-item" data-year="1976">
-            <div>16e – 17e siècle</div>
-            <div class="fixedtop-timeline-load" id="load-1976"></div>
-            <div class="progress-bar" id="progress-1976"></div>
-          </a>
-          <a href="#2006" class="fixedtop-timeline-item" data-year="2006">
-            <div>1789 – 1802</div>
-            <div class="fixedtop-timeline-load" id="load-2006"></div>
-            <div class="progress-bar" id="progress-2006"></div>
-          </a>
-          <a href="#2013" class="fixedtop-timeline-item active" data-year="2013">
-            <div>1802 – 1848</div>
-            <div class="fixedtop-timeline-load" id="load-2013"></div>
-            <div class="progress-bar" id="progress-2013"></div>
-          </a>
-          <a href="#2018" class="fixedtop-timeline-item" data-year="2018">
-            <div>1848 – fin 19e siècle</div>
-            <div class="fixedtop-timeline-load" id="load-2018"></div>
-            <div class="progress-bar" id="progress-2018"></div>
-          </a>
-          <a href="#2020" class="fixedtop-timeline-item" data-year="2020">
-            <div>mi 20e siècle – 1980s</div>
-            <div class="fixedtop-timeline-load" id="load-2020"></div>
-            <div class="progress-bar" id="progress-2020"></div>
-          </a>
-        </div>
-      </section>
+      <div class="fixedtop-timeline">
+        <a href="#1971" class="fixedtop-timeline-item" data-year="1971">
+          <div>1990s – aujourd’hui</div>
+          <div class="fixedtop-timeline-load" id="load-1971"></div>
+          <div class="progress-bar" id="progress-1971"></div>
+        </a>
+        <a href="#1975" class="fixedtop-timeline-item" data-year="1975">
+          <div>5e – 15e siècle</div>
+          <div class="fixedtop-timeline-load" id="load-1975"></div>
+          <div class="progress-bar" id="progress-1975"></div>
+        </a>
+        <a href="#1976" class="fixedtop-timeline-item" data-year="1976">
+          <div>16e – 17e siècle</div>
+          <div class="fixedtop-timeline-load" id="load-1976"></div>
+          <div class="progress-bar" id="progress-1976"></div>
+        </a>
+        <a href="#2006" class="fixedtop-timeline-item" data-year="2006">
+          <div>1789 – 1802</div>
+          <div class="fixedtop-timeline-load" id="load-2006"></div>
+          <div class="progress-bar" id="progress-2006"></div>
+        </a>
+        <a href="#2013" class="fixedtop-timeline-item active" data-year="2013">
+          <div>1802 – 1848</div>
+          <div class="fixedtop-timeline-load" id="load-2013"></div>
+          <div class="progress-bar" id="progress-2013"></div>
+        </a>
+        <a href="#2018" class="fixedtop-timeline-item" data-year="2018">
+          <div>1848 – fin 19e siècle</div>
+          <div class="fixedtop-timeline-load" id="load-2018"></div>
+          <div class="progress-bar" id="progress-2018"></div>
+        </a>
+        <a href="#2020" class="fixedtop-timeline-item" data-year="2020">
+          <div>mi 20e siècle – 1980s</div>
+          <div class="fixedtop-timeline-load" id="load-2020"></div>
+          <div class="progress-bar" id="progress-2020"></div>
+        </a>
+      </div>
+    </section>
     <header>
       <div class="logo">
         <a href="../index.html">
@@ -424,7 +426,7 @@
           <div class="characters">
             <div class="character-card">
               <img
-                src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534666/P1.jpg"
+                src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534666/Saint-Belair.jpg"
                 alt="Sanite Belair"
               />
               <div class="text-card">
@@ -433,7 +435,10 @@
               </div>
             </div>
             <div class="character-card">
-              <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534666/P2.jpg" alt="Toussaint Louverture" />
+              <img
+                src="https://res.cloudinary.com/da9k32mdb/image/upload/v1747230125/Toussaint%20Louverture.webp"
+                alt="Toussaint Louverture"
+              />
               <div class="text-card">
                 <h2>Sanite Belair</h2>
                 <p>Lieutenante de l'armée révolutionnaire haïtienne</p>
@@ -441,7 +446,7 @@
             </div>
             <div class="character-card">
               <img
-                src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534667/P3.png"
+                src="https://res.cloudinary.com/da9k32mdb/image/upload/v1747230125/Jean-Jacques%20Dessalines.jpg"
                 alt="Jean-Jacques Dessalines"
               />
               <div class="text-card">
@@ -450,18 +455,27 @@
               </div>
             </div>
             <div class="character-card">
-              <a href="../pages/sanite.html"><img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534913/P4.jpg" alt="Dutty Boukman" /></a>
+              <a href="../pages/sanite.html"
+                ><img
+                  src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534913/P4.jpg"
+                  alt="Dutty Boukman"
+              /></a>
               <div class="text-card">
                 <h2>Sanite Belair</h2>
                 <p>Lieutenante de l'armée révolutionnaire haïtienne</p>
               </div>
             </div>
-            <div class="character-card">
-              <img src="../images/Dutty-Boukman.png" alt="Dutty Boukman" />
+            <div
+              class="character-card"
+            >
+              <img src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534666/P1.jpg" alt="Dutty Boukman" />
               <p>Dutty Boukman</p>
             </div>
             <div class="character-card">
-              <img src="../images/Dutty-Boukman.png" alt="Dutty Boukman" />
+              <img
+                src="https://res.cloudinary.com/da9k32mdb/image/upload/v1746534667/P3.png "
+                alt="Dutty Boukman"
+              />
               <p>Dutty Boukman</p>
             </div>
             <div class="character-card">
